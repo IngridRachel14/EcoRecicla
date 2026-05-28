@@ -1,0 +1,44 @@
+terraform
+
+
+# General
+**/node_modules/
+**/.env
+**/temp/
+**/__pycache__
+**/.venv
+**/temp.jpg
+**/.next
+**/build
+
+# Expo
+app-ecorecicla/.expo/
+app-ecorecicla/dist/
+app-ecorecicla/web-build/
+app-ecorecicla/expo-env.d.ts
+
+# Build y TS
+app-ecorecicla/*.tsbuildinfo
+
+# Archivos locales/env
+app-ecorecicla/.env*.local
+
+# Metro
+app-ecorecicla/.metro-health-check*
+
+# Debug
+app-ecorecicla/pm-debug.*
+app-ecorecicla/yarn-debug.*
+app-ecorecicla/yarn-error.*
+
+# macOS
+app-ecorecicla/.DS_Store
+.DS_Store
+
+# Llaves y provisiones (seguridad)
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.pem

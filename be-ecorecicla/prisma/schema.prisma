@@ -1,0 +1,154 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  Int                  @id @default(autoincrement())
+  email               String               @unique
+  name                String
+  password            String
+  barcode             String               @unique @default(uuid())
+  referralCode        String               @unique @default(cuid())
+  totalPoints         Int                  @default(0)
+  roleId              Int
+  pictureId           Int
+  createdAt           DateTime             @default(now())
+  referredById        Int?
+  referralPoints      Int                  @default(0)
+  money               Int                  @default(0)
+  passwordResetTokens PasswordResetToken[]
+  ProductRedemption   ProductRedemption[]
+  rewardClaims        RewardClaim[]
+  transactions        Transaction[]
+  picture             UserAvatar           @relation(fields: [pictureId], references: [id])
+  referredBy          User?                @relation("Referrals", fields: [referredById], references: [id])
+  referrals           User[]               @relation("Referrals")
+  role                Role                 @relation(fields: [roleId], references: [id])
+  userban             UserBan?
+
+  @@index([pictureId], map: "User_pictureId_fkey")
+  @@index([referredById], map: "User_referredById_fkey")
+  @@index([roleId], map: "User_roleId_fkey")
+}
+
+model PasswordResetToken {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  expiresAt DateTime
+  userId    Int
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "PasswordResetToken_userId_fkey")
+}
+
+model UserBan {
+  id       Int       @id @default(autoincrement())
+  userId   Int       @unique
+  reason   String?
+  bannedAt DateTime  @default(now())
+  until    DateTime?
+  user     User      @relation(fields: [userId], references: [id])
+}
+
+model UserAvatar {
+  id    Int    @id @default(autoincrement())
+  url   String
+  users User[]
+}
+
+model Role {
+  id    Int    @id @default(autoincrement())
+  name  String
+  users User[]
+}
+
+model Product {
+  id                Int                 @id @default(autoincrement())
+  name              String
+  descr             String
+  units             Int                 @db.SmallInt
+  price             Int                 @db.SmallInt
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  image             Image[]
+  ProductRedemption ProductRedemption[]
+}
+
+model Image {
+  id        Int      @id @default(autoincrement())
+  url       String
+  productId Int
+  createdAt DateTime @default(now())
+  product   Product  @relation(fields: [productId], references: [id])
+
+  @@index([productId], map: "Image_productId_fkey")
+}
+
+model Transaction {
+  id          Int           @id @default(autoincrement())
+  createdAt   DateTime      @default(now())
+  userId      Int
+  totalPoints Int?
+  completed   Boolean       @default(false)
+  itemscanned ItemScanned[]
+  user        User          @relation(fields: [userId], references: [id])
+
+  @@index([userId], map: "Transaction_userId_fkey")
+}
+
+model ItemScanned {
+  id            Int         @id @default(autoincrement())
+  url           String
+  createdAt     DateTime    @default(now())
+  transactionId Int
+  valid         Boolean
+  bottle        Int
+  description   String?
+  transaction   Transaction @relation(fields: [transactionId], references: [id])
+
+  @@index([transactionId], map: "ItemScanned_transactionId_fkey")
+}
+
+model Reward {
+  id          Int           @id @default(autoincrement())
+  name        String
+  description String
+  image       String?
+  costPoints  Int           @default(0)
+  createdAt   DateTime      @default(now())
+  redemptions RewardClaim[]
+}
+
+model RewardClaim {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  rewardId  Int
+  claimedAt DateTime @default(now())
+  delivered Boolean  @default(false)
+  reward    Reward   @relation(fields: [rewardId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@index([rewardId], map: "RewardClaim_rewardId_fkey")
+  @@index([userId], map: "RewardClaim_userId_fkey")
+}
+
+model ProductRedemption {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  productId  Int
+  quantity   Int      @default(1)
+  pointsUsed Int
+  claimedAt  DateTime @default(now())
+  delivered  Boolean  @default(false)
+  Product    Product  @relation(fields: [productId], references: [id])
+  User       User     @relation(fields: [userId], references: [id])
+
+  @@index([productId], map: "ProductRedemption_productId_fkey")
+  @@index([userId], map: "ProductRedemption_userId_fkey")
+}

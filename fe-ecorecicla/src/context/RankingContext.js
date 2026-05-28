@@ -1,0 +1,67 @@
+"use client";
+import React, { createContext, useContext, useEffect, useState } from "react";
+
+const RankingContext = createContext();
+
+export const useRanking = () => useContext(RankingContext);
+
+export const RankingProvider = ({ children }) => {
+  const [top10, setTop10] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [token, setToken] = useState(
+    typeof window !== "undefined" ? localStorage.getItem("token") : null
+  );
+
+  const fetchRanking = async (jwt) => {
+    if (!jwt) {
+      setError("No JWT token found");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const res = await fetch("https://api.sakuraocean.app/ranking", {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      });
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+
+      const data = await res.json();
+      setTop10(data.top10);
+      setCurrentUser(data.currentUser);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Función para refrescar el ranking manualmente (por ejemplo, después de login)
+  const reloadRanking = () => {
+    const updatedToken = localStorage.getItem("token");
+    setToken(updatedToken); // esto activa el useEffect
+  };
+
+  // Ejecutar el fetch cuando cambia el token
+  useEffect(() => {
+    if (token) {
+      setLoading(true);
+      setError(null);
+      fetchRanking(token);
+    }
+  }, [token]);
+
+  return (
+    <RankingContext.Provider
+      value={{ top10, currentUser, loading, error, reloadRanking }}
+    >
+      {children}
+    </RankingContext.Provider>
+  );
+};
