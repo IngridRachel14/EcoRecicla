@@ -1,0 +1,48 @@
+2026-05-28 00:46:13,237 - INFO - Modelo YOLO cargado: src/yolov11.pt
+2026-05-28 00:46:13,247 - INFO - Iniciando escaneo de código de barras
+2026-05-28 00:46:13,248 - INFO - Iniciando servidor Flask...
+2026-05-28 00:46:13,254 - WARNING - python-dotenv could not parse statement starting at line 3
+2026-05-28 00:46:13,355 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.110.13:5000
+2026-05-28 00:46:13,357 - INFO - [33mPress CTRL+C to quit[0m
+2026-05-28 00:46:14,303 - INFO - Cámara inicializada: 640x480
+2026-05-28 00:46:14,707 - ERROR - Error al inicializar cámara: not enough values to unpack (expected 4, got 3)
+2026-05-28 00:46:14,815 - INFO - Cámara liberada
+2026-05-28 00:46:14,816 - ERROR - Error durante el escaneo: not enough values to unpack (expected 4, got 3)
+2026-05-28 00:46:14,816 - INFO - Escaneo de código finalizado
+2026-05-28 00:50:51,507 - INFO - Modelo YOLO cargado: src/yolov11.pt
+2026-05-28 00:50:51,510 - INFO - Iniciando escaneo de código de barras
+2026-05-28 00:50:51,511 - INFO - Iniciando servidor Flask...
+2026-05-28 00:50:51,512 - WARNING - python-dotenv could not parse statement starting at line 3
+2026-05-28 00:50:51,553 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.110.13:5000
+2026-05-28 00:50:51,553 - INFO - [33mPress CTRL+C to quit[0m
+2026-05-28 00:50:52,664 - INFO - Cámara inicializada: 640x480
+2026-05-28 00:50:52,992 - ERROR - Error al inicializar cámara: 'NoneType' object is not iterable
+2026-05-28 00:50:53,068 - INFO - Cámara liberada
+2026-05-28 00:50:53,069 - ERROR - Error durante el escaneo: 'NoneType' object is not iterable
+2026-05-28 00:50:53,069 - INFO - Escaneo de código finalizado
+2026-05-28 00:54:51,644 - INFO - Aplicación finalizada
+2026-05-28 00:55:20,842 - INFO - Modelo YOLO cargado: src/yolov11.pt
+2026-05-28 00:55:20,846 - INFO - Iniciando escaneo de código de barras
+2026-05-28 00:55:20,846 - INFO - Iniciando servidor Flask...
+2026-05-28 00:55:20,847 - WARNING - python-dotenv could not parse statement starting at line 3
+2026-05-28 00:55:20,881 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.110.13:5000
+2026-05-28 00:55:20,882 - INFO - [33mPress CTRL+C to quit[0m
+2026-05-28 00:55:21,597 - INFO - Cámara inicializada: 640x480
+2026-05-28 00:58:50,415 - INFO - Modelo YOLO cargado: src/yolov11.pt
+2026-05-28 00:58:50,419 - INFO - Iniciando escaneo de código de barras
+2026-05-28 00:58:50,419 - INFO - Iniciando servidor Flask...
+2026-05-28 00:58:50,456 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.110.13:5000
+2026-05-28 00:58:50,456 - INFO - [33mPress CTRL+C to quit[0m
+2026-05-28 00:58:51,328 - INFO - Cámara inicializada: 640x480

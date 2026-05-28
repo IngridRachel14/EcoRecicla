@@ -6,7 +6,6 @@ import time
 import logging
 import sys
 from flask import Flask, jsonify, request
-from pyzbar.pyzbar import decode
 from playsound import playsound
 from ultralytics import YOLO
 from contextlib import contextmanager
@@ -530,9 +529,10 @@ class ScannerApp:
                         break
                     
                     # Buscar códigos de barras
-                    barcodes = decode(frame)
-                    for barcode in barcodes:
-                        code_data = barcode.data.decode('utf-8')
+                    detector = cv2.barcode.BarcodeDetector()
+                    retval, decoded_info, decoded_type = detector.detectAndDecode(frame)
+                    barcodes = [info for info in (decoded_info or []) if info]
+                    for code_data in barcodes:
                         if code_data:
                             logger.info(f"Código detectado: {code_data}")
                             
