@@ -29,7 +29,7 @@ export default function Tienda() {
       
       if (!token) return;
       console.log("hola")
-      const response = await fetch(`https://api.sakuraocean.app/profile`, {
+      const response = await fetch(`http://67.205.137.87:3000/profile`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -58,7 +58,7 @@ export default function Tienda() {
           return;
         }
 
-        const response = await fetch('https://api.sakuraocean.app/product', {
+        const response = await fetch('http://67.205.137.87:3000/product', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -91,7 +91,7 @@ export default function Tienda() {
     try {
       const token = getAuthToken();
 
-      const response = await fetch('https://api.sakuraocean.app/product/redeem', {
+      const response = await fetch('http://67.205.137.87:3000/product/redeem', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -165,7 +165,7 @@ export default function Tienda() {
         
         // Update product stock (refresh products)
         const token = getAuthToken();
-        const response = await fetch('https://api.sakuraocean.app/product', {
+        const response = await fetch('http://67.205.137.87:3000/product', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,

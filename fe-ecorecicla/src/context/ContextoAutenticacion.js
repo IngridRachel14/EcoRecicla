@@ -15,7 +15,7 @@ export const ProveedorAutenticacion = ({ children }) => {
 
   const iniciarSesion = async (email, password) => {
     try {
-      const response = await fetch('http://67.205.137.87:3000', {
+      const response = await fetch('http://67.205.137.87:3000/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -6,7 +6,7 @@ const ContextoRegistro = createContext();
 export const ProveedorRegistro = ({ children }) => {
   const registrarUsuario = async (nombre, email, password) => {
     try {
-      const respuesta = await fetch('http://67.205.137.87:3000', {
+      const respuesta = await fetch('http://67.205.137.87:3000/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

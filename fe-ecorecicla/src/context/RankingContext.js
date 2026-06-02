@@ -22,7 +22,7 @@ export const RankingProvider = ({ children }) => {
     }
 
     try {
-      const res = await fetch("http://67.205.137.87:3000", {
+      const res = await fetch("http://67.205.137.87:3000/ranking", {
         headers: {
           Authorization: `Bearer ${jwt}`,
         },

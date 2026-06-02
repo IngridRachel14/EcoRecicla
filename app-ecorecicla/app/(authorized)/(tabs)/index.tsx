@@ -14,7 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 const fetchTransactionHistory = async (token) => {
   try {
-    const response = await fetch('https://api.sakuraocean.app/scan/history', {
+    const response = await fetch('http://67.205.137.87:3000/scan/history', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token.current}`,
