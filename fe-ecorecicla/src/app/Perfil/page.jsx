@@ -39,7 +39,7 @@ export default function PerfilPage() {
               }`}
           >
             <img
-              src={user?.picture?.url}
+              src={user?.picture?.url || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'}
               alt="avatar"
               className="w-40 h-40 rounded-full border-4 border-white object-cover shadow-lg"
             />
