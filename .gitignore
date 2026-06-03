@@ -43,6 +43,7 @@ app-ecorecicla/.DS_Store
 *.mobileprovision
 *.pem
 
+#entorno virtual de Python
 .env
 venv/
 __pycache__/

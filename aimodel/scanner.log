@@ -46,3 +46,12 @@
  * Running on http://192.168.110.13:5000
 2026-05-28 00:58:50,456 - INFO - [33mPress CTRL+C to quit[0m
 2026-05-28 00:58:51,328 - INFO - Cámara inicializada: 640x480
+2026-06-02 18:31:55,793 - INFO - Modelo YOLO cargado: src/yolov11.pt
+2026-06-02 18:31:55,805 - INFO - Iniciando escaneo de código de barras
+2026-06-02 18:31:55,805 - INFO - Iniciando servidor Flask...
+2026-06-02 18:31:56,152 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.110.13:5000
+2026-06-02 18:31:56,160 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-02 18:32:00,536 - INFO - Cámara inicializada: 640x480

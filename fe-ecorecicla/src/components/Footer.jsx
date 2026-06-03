@@ -6,15 +6,12 @@ export default function Footer() {
     const [mostrarModal2, setMostrarModal2] = useState(false);
     const [mostrarModalIngrid, setMostrarModalIngrid] = useState(false);
     const [mostrarModalLuis, setMostrarModalLuis] = useState(false);
-    const [mostrarModalJun, setMostrarModalJun] = useState(false);
-    const [mostrarModalAlvaro, setMostrarModalAlvaro] = useState(false);
-    const [mostrarModalClaudio, setMostrarModalClaudio] = useState(false);
     const integrantes = [
         {
             nombre: 'Ingrid Quintanar',
             imagen: '/Ingrid.jpg',
-            rol: 'Encargada de estrategia de negocio y marketing',
-            descripcion: 'Encargada de definir estrategias de mercado, posicionamiento del producto y promoción de la plataforma.',
+            rol: 'Desarrolladora de Software & Analista de Sistemas',
+            descripcion: 'Responsable del diseño y desarrollo del frontend, gestión de la base de datos y análisis de requerimientos del sistema.',
             contacto: 'ingrid.quintanar@utp.ac.pa',
             mostrar: mostrarModalIngrid,
             setMostrar: setMostrarModalIngrid,
@@ -22,39 +19,13 @@ export default function Footer() {
         {
             nombre: 'Luis Calderón',
             imagen: '/Luis.jpg',
-            rol: 'Líder del Proyecto - Gerente',
-            descripcion: 'Responsable de liderar el equipo, supervisar el desarrollo general del proyecto y tomar decisiones clave.',
+            rol: 'Desarrollador de Software & Líder Técnico',
+            descripcion: 'Responsable del desarrollo del módulo de inteligencia artificial, integración del backend y coordinación técnica del proyecto.',
             contacto: 'luis.calderon1@utp.ac.pa',
             mostrar: mostrarModalLuis,
             setMostrar: setMostrarModalLuis,
         },
-        {
-            nombre: 'Jun Cen',
-            imagen: '/Jun.jpg',
-            rol: 'Desarrollador Backend',
-            descripcion: 'Encargado del desarrollo del backend, manejo de puntos, lógica de reciclaje y comunicación con la base de datos.',
-            contacto: 'jun.cen@utp.ac.pa',
-            mostrar: mostrarModalJun,
-            setMostrar: setMostrarModalJun,
-        },
-        {
-            nombre: 'Álvaro Frago',
-            imagen: '/Alvaro.jpg',
-            rol: 'Desarrollador Frontend / UI-UX',
-            descripcion: 'Diseña la interfaz de usuario, experiencia de navegación y desarrolla funcionalidades del frontend.',
-            contacto: 'alvaro.frago@utp.ac.pa',
-            mostrar: mostrarModalAlvaro,
-            setMostrar: setMostrarModalAlvaro,
-        },
-        {
-            nombre: 'Claudio Wilkey',
-            imagen: '/Claudio.jpg',
-            rol: 'Encargado de datos, calidad y documentación',
-            descripcion: 'Responsable de la documentación técnica, aseguramiento de la calidad y estructura de los datos del sistema.',
-            contacto: 'claudio.wilkey@utp.ac.pa',
-            mostrar: mostrarModalClaudio,
-            setMostrar: setMostrarModalClaudio,
-        },
+       
     ];
 
 
