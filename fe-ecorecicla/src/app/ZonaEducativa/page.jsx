@@ -3,155 +3,117 @@ import { useState } from "react";
 import Navbar from "@/components/Nav";
 import Footer from "@/components/Footer";
 
-export default function ZonaEducativa() {
-  const [expandedCard, setExpandedCard] = useState(null);
+const facts = [
 
-  const toggleCard = (index) => {
-    setExpandedCard(expandedCard === index ? null : index);
-  };
+  {
+    icon: "♻️",
+    title: "El largo camino de una botella de plástico",
+    summary: "Puede tardar hasta 500 años en descomponerse si no se recicla correctamente.",
+    detail: "Además, muchas de estas botellas terminan en los océanos, afectando la vida marina y contaminando los ecosistemas. Usar botellas reutilizables ayuda mucho a reducir este impacto ambiental."
+  },
+
+  {
+    icon: "🌱",
+    title: "Un pequeño gesto, un gran impacto",
+    summary: "Salva 17 árboles, 26.000 litros de agua y reduce la contaminación del aire en un 74%.",
+    detail: "El papel reciclado también ahorra un 60% de energía respecto al papel nuevo, lo que disminuye emisiones de CO₂ y protege hábitats naturales de la deforestación."
+  },
+
+  {
+    icon: "⚡",
+    title: "Una lata, múltiples vidas",
+    summary: "Ahorra suficiente energía para alimentar una televisión durante 3 horas.",
+    detail: "Además, el aluminio reciclado mantiene su calidad original, permitiendo ser reutilizado infinitamente en latas, bicicletas, herramientas y más."
+  },
+
+]
+
+
+
+const videos = [
+  { src: "https://www.youtube.com/embed/d84Sbs5IVzc?si=4OmsQ2NBS75RH-sk", title: "¿Cómo reciclar?" },
+  { src: "https://www.youtube.com/embed/cCOfCFzQvCc?si=LmwYn4f_W6pfXHuK", title: "Reciclaje de plástico" },
+]
+
+
+
+export default function ZonaEducativa() {
+  const [expanded, setExpanded] = useState(null)
 
   return (
-    <div className="bg-gray-50 text-gray-800 min-h-screen font-sans">
+    <div className="min-h-screen bg-white">
       <Navbar />
+      <main className="max-w-6xl mx-auto px-6 py-12">
+        {/* Header */}
+        <div className="mb-10">
+          <h1 className="text-3xl font-bold text-gray-900">Zona educativa</h1>
+          <p className="text-l text-gray-500 mt-2">
+            Aprende sobre el impacto del reciclaje y cómo pequeñas acciones pueden cambiar nuestro planeta.
+          </p>
+        </div>
 
-      <main className="max-w-6xl mx-auto px-4 py-7">
-        <section className="mb-12">
-          <h2 className="text-4xl font-semibold mb-6 text-green-700 ml-[2%]">
-            Zona Educativa
-          </h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          {/* Videos */}
+          <div className="flex flex-col gap-6">
+            <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">Videos</p>
+            {videos.map((v, i) => (
+              <div key={i} className="flex flex-col gap-2">
+                <p className="text-xl font-bold text-[#0F5F46]">
+                  {v.title}
+                </p>
+                <div className="rounded-xl overflow-hidden border border-gray-200 aspect-video">
+                  <iframe
+                    className="w-full h-full"
+                    src={v.src}
+                    title={v.title}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-start">
-            {/* Sección de Video */}
-            <div className="w-full">
-              <h3 className="text-xl font-semibold mb-4 text-green-800">
-                ¿Cómo Reciclar?
-              </h3>
-              <div className="aspect-video w-full max-w-md rounded-lg shadow-lg overflow-hidden mx-auto lg:mx-0">
-                <iframe
-                  width="500"
-                  height="315"
-                  src="https://www.youtube.com/embed/d84Sbs5IVzc?si=4OmsQ2NBS75RH-sk"
-                  title="YouTube video"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                ></iframe>
-              </div>
-
-              <h3 className="text-xl font-semibold mt-8 mb-4 text-green-800">
-                Reciclaje de plástico 
-              </h3>
-              <div className="aspect-video w-full max-w-md rounded-lg shadow-lg overflow-hidden mx-auto lg:mx-0">
-               <iframe width="560" height="315" src="https://www.youtube.com/embed/cCOfCFzQvCc?si=LmwYn4f_W6pfXHuK"
-                title="YouTube video player" 
-                
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                 referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen></iframe>
-              </div>
-            </div>
-
-            {/* Sección de Datos Curiosos */}
-            <div className="w-full">
-              <h3 className="text-xl font-semibold mb-4 text-green-800">
-                Datos Curiosos
-              </h3>
-              <div className="grid grid-cols-1 gap-4">
-                {/* Card 1 */}
-                <div
-                  className={`relative bg-green-100 border border-green-300 rounded-lg p-5 shadow-md transition-all duration-1500 ${
-                    expandedCard === 0 ? "h-auto" : "min-h-[180px]"
-                  }`}
-                >
-                  <div className="text-green-600 text-3xl mb-2">♻️</div>
-                  <h4 className="font-bold text-lg mb-2">
-                    Una sola botella de plástico...
-                  </h4>
-                  <p>
-                    ...puede tardar hasta 500 años en descomponerse si no se
-                    recicla correctamente.
-                  </p>
-                  {expandedCard === 0 && (
-                    <p className="mt-3 text-sm text-gray-700">
-                      Además, muchas de estas botellas terminan en los océanos,
-                      afectando la vida marina y contaminando los ecosistemas.
-                      Usar botellas reutilizables ayuda mucho a reducir este
-                      impacto ambiental.
-                    </p>
-                  )}
-                  <button
-                    onClick={() => toggleCard(0)}
-                    className="absolute top-4 right-4 text-xl text-green-700 hover:text-green-900"
-                  >
-                    {expandedCard === 0 ? "✕" : "+"}
-                  </button>
-                </div>
-
-                {/* Card 2 */}
-                <div
-                  className={`relative bg-lime-100 border border-lime-200 rounded-lg p-5 shadow-md transition-all duration-500 ${
-                    expandedCard === 1 ? "h-auto" : "min-h-[180px]"
-                  }`}
-                >
-                  <div className="text-lime-600 text-3xl mb-2">🌱</div>
-                  <h4 className="font-bold text-lg mb-2">
-                    Reciclar una tonelada de papel...
-                  </h4>
-                  <p>
-                    ...salva 17 árboles, 26.000 litros de agua y reduce la
-                    contaminación del aire en un 74%.
-                  </p>
-                  {expandedCard === 1 && (
-                    <p className="mt-3 text-sm text-gray-700">
-                      El papel reciclado también ahorra un 60% de energía
-                      respecto al papel nuevo, lo que disminuye emisiones de CO₂
-                      y protege hábitats naturales de la deforestación.
-                    </p>
-                  )}
-                  <button
-                    onClick={() => toggleCard(1)}
-                    className="absolute top-4 right-4 text-xl text-lime-700 hover:text-lime-900 "
-                  >
-                    {expandedCard === 1 ? "✕" : "+"}
-                  </button>
-                </div>
-
-                {/* Card 3 */}
-                <div
-                  className={`relative bg-orange-100 border border-orange-200 rounded-lg p-5 shadow-md transition-all duration-500 ${
-                    expandedCard === 2 ? "h-auto" : "min-h-[180px]"
-                  }`}
-                >
-                  <div className="text-emerald-600 text-3xl mb-2">⚡</div>
-                  <h4 className="font-bold text-lg mb-2">
-                    Reciclar una lata de aluminio...
-                  </h4>
-                  <p>
-                    ...ahorra suficiente energía para alimentar una televisión
-                    durante 3 horas.
-                  </p>
-                  {expandedCard === 2 && (
-                    <p className="mt-3 text-sm text-gray-700">
-                      Además, el aluminio reciclado mantiene su calidad
-                      original, permitiendo ser reutilizado infinitamente en
-                      latas, bicicletas, herramientas y más.
-                    </p>
-                  )}
-                  <button
-                    onClick={() => toggleCard(2)}
-                    className="absolute top-4 right-4 text-xl text-emerald-700 hover:text-emerald-900"
-                  >
-                    {expandedCard === 2 ? "✕" : "+"}
-                  </button>
                 </div>
               </div>
+            ))}
+          </div>
+
+
+
+          {/* Datos curiosos — misma altura que los videos */}
+          <div className="flex flex-col gap-4">
+            <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">Datos curiosos</p>
+            <div className="flex flex-col gap-4 flex-1">
+              {facts.map((fact, i) => (
+                <div
+                  key={i}
+                  className="flex-1 bg-white border border-gray-200 rounded-xl p-5 hover:border-[#0d542b] transition-colors flex flex-col justify-between"
+                >
+
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex items-start gap-3">
+                      <span className="text-2xl">{fact.icon}</span>
+                      <div>
+                        <p className="text-sm font-medium text-gray-900 mb-1">{fact.title}</p>
+                        <p className="text-sm text-gray-500">{fact.summary}</p>
+                        {expanded === i && (
+                          <p className="text-sm text-gray-500 mt-2">{fact.detail}</p>
+                        )}
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => setExpanded(expanded === i ? null : i)}
+                      className="flex-shrink-0 w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:border-[#0d542b] hover:text-[#0d542b] transition-colors text-sm"
+                    >
+                      {expanded === i ? '−' : '+'}
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        </section>
-       
+        </div>
       </main>
-       <Footer/>
+      <Footer />
     </div>
-  );
+  )
 }
