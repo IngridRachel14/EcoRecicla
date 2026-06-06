@@ -127,12 +127,6 @@ export default function Navbar() {
                 href="/Referidos"
                 className="bg-white hover:bg-gray-200 text-black px-4 py-2 rounded-lg transition duration-200 shadow-sm"
               >
-                Referidos
-              </Link>
-              <Link
-                href="/ZonaEducativa"
-                className="bg-white hover:bg-gray-200 text-black px-4 py-2 rounded-lg transition duration-200 shadow-sm"
-              >
                 Zona Educativa
               </Link>
               <Link
