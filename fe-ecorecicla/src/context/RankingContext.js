@@ -1,18 +1,18 @@
 "use client";
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useAutenticacion } from "@/context/ContextoAutenticacion";
 
 const RankingContext = createContext();
 
 export const useRanking = () => useContext(RankingContext);
 
 export const RankingProvider = ({ children }) => {
+  const { token } = useAutenticacion();
+
   const [top10, setTop10] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [token, setToken] = useState(
-    typeof window !== "undefined" ? localStorage.getItem("token") : null
-  );
 
   const fetchRanking = async (jwt) => {
     if (!jwt) {
@@ -42,12 +42,6 @@ export const RankingProvider = ({ children }) => {
     }
   };
 
-  // Función para refrescar el ranking manualmente (por ejemplo, después de login)
-  const reloadRanking = () => {
-    const updatedToken = localStorage.getItem("token");
-    setToken(updatedToken); // esto activa el useEffect
-  };
-
   // Ejecutar el fetch cuando cambia el token
   useEffect(() => {
     if (token) {
@@ -59,7 +53,7 @@ export const RankingProvider = ({ children }) => {
 
   return (
     <RankingContext.Provider
-      value={{ top10, currentUser, loading, error, reloadRanking }}
+      value={{ top10, currentUser, loading, error}}
     >
       {children}
     </RankingContext.Provider>

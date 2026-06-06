@@ -21,15 +21,15 @@ export const metadata = {
 export default function DisenoRaiz({ children }) {
   return (
     <html lang="es">
-      <body className={roboto.className}>
+    <body className={roboto.className}>
+      <ProveedorAutenticacion>
         <RankingProvider>
-          <ProveedorAutenticacion>
-            <ProveedorRegistro>
-              {children}
-            </ProveedorRegistro>
-          </ProveedorAutenticacion>
+          <ProveedorRegistro>
+            {children}
+          </ProveedorRegistro>
         </RankingProvider>
-      </body>
-    </html>
+      </ProveedorAutenticacion>
+    </body>
+  </html>
   );
 }
