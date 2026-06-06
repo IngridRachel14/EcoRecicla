@@ -9,27 +9,11 @@ export const getLeaderboard = async (req: Request, res: Response): Promise<any> 
       select: {
         id: true,
         name: true,
-        transactions: {
-          where: { completed: true },
-          select: { totalPoints: true }
-        }
+        totalPoints: true
       }
     });
 
-    const userScores = users.map(user => {
-      const totalPoints = user.transactions.reduce(
-        (acc, tx) => acc + (tx.totalPoints ?? 0),
-        0
-      );
-      return {
-        id: user.id,
-        name: user.name,
-        totalPoints
-      };
-    });
-
-    const sorted = userScores.sort((a, b) => b.totalPoints - a.totalPoints);
-
+    const sorted = users.sort((a, b) => b.totalPoints - a.totalPoints);
     const top10 = sorted.slice(0, 10);
 
     const currentUserIndex = sorted.findIndex(u => u.id === currentUserId);

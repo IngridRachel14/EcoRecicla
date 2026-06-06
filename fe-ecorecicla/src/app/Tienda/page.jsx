@@ -26,7 +26,7 @@ export default function Tienda() {
   const fetchUserPoints = async () => {
     try {
       const token = getAuthToken();
-      
+
       if (!token) return;
       console.log("hola")
       const response = await fetch(`http://67.205.137.87:3000/profile`, {
@@ -124,13 +124,13 @@ export default function Tienda() {
 
     try {
       const totalCost = getCartTotal();
-      
+
       if (userPoints < totalCost) {
         throw new Error(`Puntos insuficientes. Tienes: ${userPoints}, Necesitas: ${totalCost}`);
       }
 
       const redemptionResults = [];
-      
+
       // Process each item in cart
       for (const item of cart) {
         try {
@@ -151,18 +151,18 @@ export default function Tienda() {
 
       // Check if all redemptions were successful
       const allSuccessful = redemptionResults.every(r => r.success);
-      
+
       if (allSuccessful) {
         setRedemptionStatus({
           type: 'success',
           message: 'Todos los productos han sido canjeados exitosamente',
           details: redemptionResults
         });
-        
+
         // Clear cart and refresh user points
         setCart([]);
         await fetchUserPoints();
-        
+
         // Update product stock (refresh products)
         const token = getAuthToken();
         const response = await fetch('http://67.205.137.87:3000/product', {
@@ -172,12 +172,12 @@ export default function Tienda() {
             'Content-Type': 'application/json',
           },
         });
-        
+
         if (response.ok) {
           const data = await response.json();
           setProducts(data.products || data);
         }
-        
+
       } else {
         const failedItems = redemptionResults.filter(r => !r.success);
         setRedemptionStatus({
@@ -194,7 +194,7 @@ export default function Tienda() {
       });
     } finally {
       setProcessingRedemption(false);
-      
+
       // Auto-hide status message after 5 seconds
       setTimeout(() => {
         setRedemptionStatus(null);
@@ -300,13 +300,12 @@ export default function Tienda() {
       <div className="min-h-screen">
         {/* Status Messages */}
         {redemptionStatus && (
-          <div className={`fixed top-20 left-1/2 transform -translate-x-1/2 z-50 p-4 rounded-lg shadow-lg max-w-md w-full mx-4 ${
-            redemptionStatus.type === 'success' 
+          <div className={`fixed top-20 left-1/2 transform -translate-x-1/2 z-50 p-4 rounded-lg shadow-lg max-w-md w-full mx-4 ${redemptionStatus.type === 'success'
               ? 'bg-green-100 border border-green-400 text-green-700'
               : redemptionStatus.type === 'error'
-              ? 'bg-red-100 border border-red-400 text-red-700'
-              : 'bg-yellow-100 border border-yellow-400 text-yellow-700'
-          }`}>
+                ? 'bg-red-100 border border-red-400 text-red-700'
+                : 'bg-yellow-100 border border-yellow-400 text-yellow-700'
+            }`}>
             <div className="flex items-start">
               {redemptionStatus.type === 'success' && <CheckCircle className="h-5 w-5 mr-2 mt-0.5" />}
               {redemptionStatus.type === 'error' && <AlertCircle className="h-5 w-5 mr-2 mt-0.5" />}
@@ -361,9 +360,9 @@ export default function Tienda() {
                   <div key={product.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
                     <div className="relative">
                       <img
-                        src={product.images?.[0]?.url?.replace('undefined/', '') || '/api/placeholder/300/200'}
+                        src={product.images?.[0]?.url?.replace('undefined/', '')}
                         alt={product.name}
-                        className="w-full h-48 object-cover"
+                        className="w-full h-48 object-contain p-2"
                       />
                       <div className="absolute top-4 right-4 bg-white rounded-full px-3 py-1 shadow-md">
                         <span className="text-sm font-semibold text-gray-600">
@@ -469,7 +468,7 @@ export default function Tienda() {
                             {getCartTotal()} pts
                           </span>
                         </div>
-                        
+
                         <div className="flex justify-between items-center mb-4 text-sm">
                           <span className="text-gray-600">Puntos disponibles:</span>
                           <span className={`font-semibold ${userPoints >= getCartTotal() ? 'text-green-600' : 'text-red-600'}`}>
@@ -477,7 +476,7 @@ export default function Tienda() {
                           </span>
                         </div>
 
-                        <button 
+                        <button
                           onClick={handleRedemption}
                           disabled={processingRedemption || userPoints < getCartTotal() || cart.length === 0}
                           className="w-full bg-[#0d542b] text-white py-3 rounded-lg hover:bg-green-700 transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -494,7 +493,7 @@ export default function Tienda() {
                             </>
                           )}
                         </button>
-                        
+
                         {userPoints < getCartTotal() && cart.length > 0 && (
                           <p className="text-red-600 text-sm mt-2 text-center">
                             Puntos insuficientes para completar el canje
@@ -510,7 +509,7 @@ export default function Tienda() {
         </div>
 
         {/* Footer */}
-        <Footer/>
+        <Footer />
       </div>
     </>
   );
