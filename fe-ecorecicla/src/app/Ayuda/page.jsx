@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import categories from "./preguntasFrec";
 import Navbar from "@/components/Nav";
 import Footer from "@/components/Footer";
-
+ 
 // SVG Iconos
 const icons = {
   cuenta: (
@@ -34,30 +34,30 @@ const icons = {
     </svg>
   ),
 };
-
+ 
 export default function Ayuda() {
   const [activeCategory, setActiveCategory] = useState("cuenta");
   const [openQuestion, setOpenQuestion] = useState(null);
-
+ 
   const activeFaqs = categories.find((c) => c.key === activeCategory)?.faqs || [];
   const activeLabel = categories.find((c) => c.key === activeCategory)?.title || "";
-
+ 
   useEffect(() => {
     setOpenQuestion(null);
   }, [activeCategory]);
-
+ 
   return (
     <main style={{ fontFamily: "'DM Sans', sans-serif" }}>
       {/* Google Font */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap');
-
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap%27);
+ 
         .faq-item {
           border-bottom: 1px solid #e8f0e4;
           transition: background 0.2s;
         }
         .faq-item:last-child { border-bottom: none; }
-
+ 
         .cat-btn {
           transition: all 0.25s ease;
           border: 1.5px solid transparent;
@@ -75,7 +75,7 @@ export default function Ayuda() {
         .cat-btn.active .cat-dot {
           background: #5a9a3c;
         }
-
+ 
         .answer-enter {
           animation: slideDown 0.25s ease forwards;
         }
@@ -83,23 +83,23 @@ export default function Ayuda() {
           from { opacity: 0; transform: translateY(-6px); }
           to   { opacity: 1; transform: translateY(0); }
         }
-
+ 
         .chevron {
           transition: transform 0.25s ease;
         }
         .chevron.open {
           transform: rotate(180deg);
         }
-
+ 
         .hero-badge {
           background: rgba(255,255,255,0.15);
           backdrop-filter: blur(8px);
           border: 1px solid rgba(255,255,255,0.3);
         }
       `}</style>
-
+ 
       <Navbar />
-
+ 
       {/* ── HERO ── */}
       <section className="relative h-[400px] overflow-hidden">
         <div
@@ -108,7 +108,7 @@ export default function Ayuda() {
         />
         {/* subtle green tint overlay */}
         <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(30,80,20,0.45) 0%, rgba(0,0,0,0.3) 100%)" }} />
-
+ 
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-6 gap-4">
           {/* small leaf icon */}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
@@ -124,10 +124,10 @@ export default function Ayuda() {
           </p>
         </div>
       </section>
-
+ 
       {/* ── MAIN CONTENT ── */}
       <div className="max-w-5xl mx-auto px-5 py-12" style={{ color: "#1a2e14" }}>
-
+ 
         {/* ── CATEGORY PILLS ── */}
         <style>{`
           .cat-label-short { display: none; }
@@ -161,10 +161,10 @@ export default function Ayuda() {
             );
           })}
         </nav>
-
+ 
         {/* ── FAQ PANEL ── */}
         <div className="bg-white rounded-2xl shadow-sm overflow-hidden" style={{ border: "1px solid #e2edd9" }}>
-
+ 
           {/* panel header */}
           <div className="px-7 py-5 flex items-center gap-3" style={{ borderBottom: "1px solid #e8f0e4", background: "#fafdf8" }}>
             <span style={{ color: "#5a9a3c" }}>{icons[activeCategory]}</span>
@@ -173,7 +173,7 @@ export default function Ayuda() {
               {activeFaqs.length} preguntas
             </span>
           </div>
-
+ 
           {/* FAQ list */}
           {activeFaqs.map((faq, idx) => (
             <div key={idx} className="faq-item">
@@ -204,7 +204,7 @@ export default function Ayuda() {
             </div>
           ))}
         </div>
-
+ 
         {/* ── CONTACT STRIP ── */}
         <div className="mt-8 rounded-2xl px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4"
           style={{ background: "linear-gradient(135deg, #2d5a1b 0%, #3e7a28 100%)" }}>
@@ -220,9 +220,9 @@ export default function Ayuda() {
             Contactar soporte →
           </a>
         </div>
-
+ 
       </div>
-
+ 
       <Footer />
     </main>
   );

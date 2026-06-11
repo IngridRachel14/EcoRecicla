@@ -529,9 +529,9 @@ class ScannerApp:
                         break
                     
                     # Buscar códigos de barras
-                    detector = cv2.barcode.BarcodeDetector()
-                    retval, decoded_info, decoded_type = detector.detectAndDecode(frame)
-                    barcodes = [info for info in (decoded_info or []) if info]
+                    detector = cv2.QRCodeDetector()
+                    retval, decoded_info, points, _ = detector.detectAndDecodeMulti(frame)
+                    barcodes = [info for info in (decoded_info or []) if info] if retval else []
                     for code_data in barcodes:
                         if code_data:
                             logger.info(f"Código detectado: {code_data}")
@@ -672,7 +672,7 @@ class ScannerApp:
             
             # Texto principal
             font_scale = min(width/800, 1.5)
-            cv2.putText(display_frame, text, (50, height//2), cv2.FONT_HERSHEY_BOLD, font_scale, (255, 255, 255), 2)
+            cv2.putText(display_frame, text, (50, height//2), cv2.FONT_HERSHEY_SIMPLEX, font_scale, (255, 255, 255), 2)
             cv2.putText(display_frame, sub_text, (50, height//2 + 30), cv2.FONT_HERSHEY_SIMPLEX, font_scale*0.6, (200, 200, 200), 1)
             
             cv2.imshow('Escaner de codigo', display_frame)
@@ -700,7 +700,7 @@ class ScannerApp:
             
             # Texto principal
             font_scale = min(width/800, 1.5)
-            cv2.putText(display_frame, text, (50, height//2), cv2.FONT_HERSHEY_BOLD, font_scale, (255, 255, 255), 2)
+            cv2.putText(display_frame, text, (50, height//2), cv2.FONT_HERSHEY_SIMPLEX, font_scale, (255, 255, 255), 2)
             cv2.putText(display_frame, sub_text, (50, height//2 + 30), cv2.FONT_HERSHEY_SIMPLEX, font_scale*0.6, (200, 200, 200), 1)
             
             cv2.imshow('Escaner de codigo', display_frame)
