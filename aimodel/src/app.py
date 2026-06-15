@@ -971,6 +971,16 @@ if __name__ == '__main__':
         
     except KeyboardInterrupt:
         logger.info("Aplicación interrumpida por el usuario")
+        try:
+            import requests
+            requests.post(
+                f'{url_backend}/scan/cancel',
+                headers={'Authorization': f'Bearer {API_TOKEN}'},
+                timeout=5
+            )
+            logger.info("Sesión cancelada en el backend")
+        except Exception as e:
+            logger.warning(f"No se pudo cancelar sesión: {e}")
     except Exception as e:
         logger.error(f"Error fatal: {e}")
     finally:

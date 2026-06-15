@@ -360,3 +360,544 @@
 2026-06-11 01:31:22,861 - INFO - Iniciando clasificación de objetos
 2026-06-11 01:31:23,202 - INFO - Cámara inicializada: 640x480
 2026-06-11 01:31:23,209 - INFO - Presiona 'C' para capturar o usa el endpoint /capture
+2026-06-11 01:40:09,797 - INFO - 192.168.110.240 - - [11/Jun/2026 01:40:09] "POST /quit HTTP/1.1" 200 -
+2026-06-11 01:40:09,812 - INFO - Saliendo de la clasificación
+2026-06-11 01:40:09,865 - INFO - Cámara liberada
+2026-06-11 01:40:09,866 - INFO - Clasificación finalizada
+2026-06-11 01:40:09,869 - INFO - Cámara liberada
+2026-06-11 01:40:09,871 - INFO - Escaneo de código finalizado
+2026-06-11 02:18:07,588 - INFO - Aplicación finalizada
+2026-06-11 02:18:35,680 - INFO - Modelo YOLO cargado: src/yolov11.pt
+2026-06-11 02:18:35,690 - INFO - Iniciando escaneo de código de barras
+2026-06-11 02:18:35,690 - INFO - Iniciando servidor Flask...
+2026-06-11 02:18:35,846 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.110.13:5000
+2026-06-11 02:18:35,846 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-11 02:18:37,056 - INFO - Cámara inicializada: 640x480
+2026-06-11 02:18:41,032 - INFO - Código detectado: 6826765434593769388167
+2026-06-11 02:18:43,058 - INFO - Codigo validado por el backend
+2026-06-11 02:18:43,627 - INFO - Iniciando clasificación de objetos
+2026-06-11 02:18:43,807 - INFO - Cámara inicializada: 640x480
+2026-06-11 02:18:43,808 - INFO - Presiona 'C' para capturar o usa el endpoint /capture
+2026-06-11 02:18:51,759 - INFO - 192.168.110.240 - - [11/Jun/2026 02:18:51] "POST /quit HTTP/1.1" 200 -
+2026-06-11 02:18:51,801 - INFO - Saliendo de la clasificación
+2026-06-11 02:18:51,856 - INFO - Cámara liberada
+2026-06-11 02:18:51,857 - INFO - Clasificación finalizada
+2026-06-11 02:18:51,979 - INFO - Cámara liberada
+2026-06-11 02:18:52,080 - INFO - Escaneo de código finalizado
+2026-06-11 02:19:01,765 - INFO - Aplicación finalizada
+2026-06-11 02:26:58,351 - INFO - Modelo YOLO cargado: src/yolov11.pt
+2026-06-11 02:26:58,360 - INFO - Iniciando escaneo de código de barras
+2026-06-11 02:26:58,361 - INFO - Iniciando servidor Flask...
+2026-06-11 02:26:58,487 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.110.13:5000
+2026-06-11 02:26:58,488 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-11 02:27:00,357 - INFO - Cámara inicializada: 640x480
+2026-06-11 02:27:03,064 - INFO - Código detectado: 6826765434593769388167
+2026-06-11 02:27:05,000 - WARNING - Codigo rechazado: Internal Server Error
+2026-06-11 02:27:19,813 - INFO - Código detectado: 6826765434593769388167
+2026-06-11 02:27:21,378 - WARNING - Codigo ya escaneado: El cÃ³digo ya fue escaneado anteriormente
+2026-06-11 02:30:07,611 - INFO - Modelo YOLO cargado: src/yolov11.pt
+2026-06-11 02:30:07,615 - INFO - Iniciando escaneo de código de barras
+2026-06-11 02:30:07,615 - INFO - Iniciando servidor Flask...
+2026-06-11 02:30:07,657 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.110.13:5000
+2026-06-11 02:30:07,657 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-11 02:30:08,692 - INFO - Cámara inicializada: 640x480
+2026-06-11 02:30:37,384 - INFO - Código detectado: 6826765434593769388167
+2026-06-11 02:30:39,160 - INFO - Codigo validado por el backend
+2026-06-11 02:30:39,737 - INFO - Iniciando clasificación de objetos
+2026-06-11 02:30:39,931 - INFO - Cámara inicializada: 640x480
+2026-06-11 02:30:39,931 - INFO - Presiona 'C' para capturar o usa el endpoint /capture
+2026-06-11 02:30:41,689 - INFO - 192.168.110.240 - - [11/Jun/2026 02:30:41] "POST /quit HTTP/1.1" 200 -
+2026-06-11 02:30:41,702 - INFO - Saliendo de la clasificación
+2026-06-11 02:30:41,817 - INFO - Cámara liberada
+2026-06-11 02:30:41,818 - INFO - Clasificación finalizada
+2026-06-11 02:30:42,104 - INFO - Cámara liberada
+2026-06-11 02:30:42,156 - INFO - Escaneo de código finalizado
+2026-06-11 02:31:11,709 - INFO - Aplicación finalizada
+2026-06-11 09:21:50,522 - INFO - Modelo YOLO cargado: src/yolov11.pt
+2026-06-11 09:21:50,554 - INFO - Iniciando escaneo de código de barras
+2026-06-11 09:21:50,554 - INFO - Iniciando servidor Flask...
+2026-06-11 09:21:50,634 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.110.13:5000
+2026-06-11 09:21:50,636 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-11 09:21:52,381 - INFO - Cámara inicializada: 640x480
+2026-06-11 09:22:14,117 - INFO - Código detectado: 6826765434593769388167
+2026-06-11 09:22:16,232 - WARNING - Codigo ya escaneado: El cÃ³digo ya fue escaneado anteriormente
+2026-06-11 09:23:51,893 - INFO - Modelo YOLO cargado: src/yolov11.pt
+2026-06-11 09:23:51,901 - INFO - Iniciando escaneo de código de barras
+2026-06-11 09:23:51,901 - INFO - Iniciando servidor Flask...
+2026-06-11 09:23:51,957 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.110.13:5000
+2026-06-11 09:23:51,961 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-11 09:23:52,480 - INFO - Cámara inicializada: 640x480
+2026-06-11 09:23:56,381 - INFO - Código detectado: 6826765434593769388167
+2026-06-11 09:23:58,222 - WARNING - Codigo rechazado: Internal Server Error
+2026-06-11 09:27:10,884 - INFO - Modelo YOLO cargado: src/yolov11.pt
+2026-06-11 09:27:10,890 - INFO - Iniciando escaneo de código de barras
+2026-06-11 09:27:10,890 - INFO - Iniciando servidor Flask...
+2026-06-11 09:27:10,924 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.110.13:5000
+2026-06-11 09:27:10,926 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-11 09:27:12,077 - INFO - Cámara inicializada: 640x480
+2026-06-11 09:27:20,591 - INFO - Código detectado: 6826765434593769388167
+2026-06-11 09:27:22,620 - WARNING - Codigo ya escaneado: El cÃ³digo ya fue escaneado anteriormente
+2026-06-11 09:28:55,676 - INFO - Modelo YOLO cargado: src/yolov11.pt
+2026-06-11 09:28:55,683 - INFO - Iniciando escaneo de código de barras
+2026-06-11 09:28:55,683 - INFO - Iniciando servidor Flask...
+2026-06-11 09:28:55,726 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.110.13:5000
+2026-06-11 09:28:55,726 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-11 09:28:56,184 - INFO - Cámara inicializada: 640x480
+2026-06-11 09:29:11,178 - INFO - Código detectado: 6826765434593769388167
+2026-06-11 09:29:13,219 - INFO - Codigo validado por el backend
+2026-06-11 09:29:13,803 - INFO - Iniciando clasificación de objetos
+2026-06-11 09:29:14,134 - INFO - Cámara inicializada: 640x480
+2026-06-11 09:29:14,135 - INFO - Presiona 'C' para capturar o usa el endpoint /capture
+2026-06-11 09:29:48,000 - INFO - 192.168.110.240 - - [11/Jun/2026 09:29:48] "POST /capture HTTP/1.1" 200 -
+2026-06-11 09:29:48,011 - INFO - Capturando y analizando imagen...
+2026-06-11 09:29:54,822 - INFO - Detección completa - Válido: False, Botellas: 0
+2026-06-11 09:29:57,874 - INFO - Subiendo imagen (intento 1/3)
+2026-06-11 09:29:57,897 - INFO - Datos: valido=False, botellas=0
+2026-06-11 09:29:58,782 - INFO - Imagen subida exitosamente: Sin detección
+2026-06-11 09:29:58,783 - INFO - Respuesta del servidor: {'message': {'id': 15, 'url': '/temp/1781188199325.jpg', 'createdAt': '2026-06-11T14:29:59.988Z', 'transactionId': 11, 'valid': True, 'bottle': 0, 'description': 'Sin detección'}}
+2026-06-11 09:29:58,784 - WARNING - Clasificación inválida: objeto no válido detectado
+2026-06-11 09:29:58,785 - INFO - Imagen subida exitosamente al backend
+2026-06-11 09:30:06,773 - INFO - 192.168.110.240 - - [11/Jun/2026 09:30:06] "POST /capture HTTP/1.1" 200 -
+2026-06-11 09:30:06,790 - INFO - Capturando y analizando imagen...
+2026-06-11 09:30:07,076 - INFO - Detección completa - Válido: False, Botellas: 0
+2026-06-11 09:30:10,138 - INFO - Subiendo imagen (intento 1/3)
+2026-06-11 09:30:10,162 - INFO - Datos: valido=False, botellas=0
+2026-06-11 09:30:10,402 - INFO - Imagen subida exitosamente: Sin detección
+2026-06-11 09:30:10,402 - INFO - Respuesta del servidor: {'message': {'id': 16, 'url': '/temp/1781188211582.jpg', 'createdAt': '2026-06-11T14:30:11.681Z', 'transactionId': 11, 'valid': True, 'bottle': 0, 'description': 'Sin detección'}}
+2026-06-11 09:30:10,403 - WARNING - Clasificación inválida: objeto no válido detectado
+2026-06-11 09:30:10,403 - INFO - Imagen subida exitosamente al backend
+2026-06-11 09:30:19,574 - INFO - 192.168.110.240 - - [11/Jun/2026 09:30:19] "POST /capture HTTP/1.1" 200 -
+2026-06-11 09:30:19,615 - INFO - Capturando y analizando imagen...
+2026-06-11 09:30:19,875 - INFO - Detección completa - Válido: False, Botellas: 0
+2026-06-11 09:30:22,933 - INFO - Subiendo imagen (intento 1/3)
+2026-06-11 09:30:22,944 - INFO - Datos: valido=False, botellas=0
+2026-06-11 09:30:23,373 - INFO - Imagen subida exitosamente: Sin detección
+2026-06-11 09:30:23,374 - INFO - Respuesta del servidor: {'message': {'id': 17, 'url': '/temp/1781188224381.jpg', 'createdAt': '2026-06-11T14:30:24.585Z', 'transactionId': 11, 'valid': True, 'bottle': 0, 'description': 'Sin detección'}}
+2026-06-11 09:30:23,375 - WARNING - Clasificación inválida: objeto no válido detectado
+2026-06-11 09:30:23,377 - INFO - Imagen subida exitosamente al backend
+2026-06-11 09:30:27,056 - INFO - 192.168.110.240 - - [11/Jun/2026 09:30:27] "POST /capture HTTP/1.1" 200 -
+2026-06-11 09:30:27,074 - INFO - Capturando y analizando imagen...
+2026-06-11 09:30:27,345 - INFO - Detección completa - Válido: False, Botellas: 0
+2026-06-11 09:30:30,409 - INFO - Subiendo imagen (intento 1/3)
+2026-06-11 09:30:30,438 - INFO - Datos: valido=False, botellas=0
+2026-06-11 09:30:30,832 - INFO - Imagen subida exitosamente: Sin detección
+2026-06-11 09:30:30,833 - INFO - Respuesta del servidor: {'message': {'id': 18, 'url': '/temp/1781188231847.jpg', 'createdAt': '2026-06-11T14:30:32.050Z', 'transactionId': 11, 'valid': True, 'bottle': 0, 'description': 'Sin detección'}}
+2026-06-11 09:30:30,834 - WARNING - Clasificación inválida: objeto no válido detectado
+2026-06-11 09:30:30,836 - INFO - Imagen subida exitosamente al backend
+2026-06-11 09:31:58,080 - INFO - 192.168.110.240 - - [11/Jun/2026 09:31:58] "POST /capture HTTP/1.1" 200 -
+2026-06-11 09:31:58,080 - INFO - Capturando y analizando imagen...
+2026-06-11 09:31:58,383 - INFO - Detectado: Green Glass Bottle (confianza: 0.83)
+2026-06-11 09:31:58,384 - INFO - Detección completa - Válido: False, Botellas: 0
+2026-06-11 09:32:01,448 - INFO - Subiendo imagen (intento 1/3)
+2026-06-11 09:32:01,459 - INFO - Datos: valido=False, botellas=0
+2026-06-11 09:32:01,881 - INFO - Imagen subida exitosamente: Green Glass Bottle
+2026-06-11 09:32:01,882 - INFO - Respuesta del servidor: {'message': {'id': 19, 'url': '/temp/1781188322893.jpg', 'createdAt': '2026-06-11T14:32:03.053Z', 'transactionId': 11, 'valid': True, 'bottle': 0, 'description': 'Green Glass Bottle'}}
+2026-06-11 09:32:01,883 - WARNING - Clasificación inválida: objeto no válido detectado
+2026-06-11 09:32:01,885 - INFO - Imagen subida exitosamente al backend
+2026-06-11 09:32:05,155 - INFO - 192.168.110.240 - - [11/Jun/2026 09:32:05] "POST /capture HTTP/1.1" 200 -
+2026-06-11 09:32:05,189 - INFO - Capturando y analizando imagen...
+2026-06-11 09:32:05,453 - INFO - Detectado: Green Glass Bottle (confianza: 0.82)
+2026-06-11 09:32:05,454 - INFO - Detección completa - Válido: False, Botellas: 0
+2026-06-11 09:32:08,517 - INFO - Subiendo imagen (intento 1/3)
+2026-06-11 09:32:08,539 - INFO - Datos: valido=False, botellas=0
+2026-06-11 09:32:09,142 - INFO - Imagen subida exitosamente: Green Glass Bottle
+2026-06-11 09:32:09,144 - INFO - Respuesta del servidor: {'message': {'id': 20, 'url': '/temp/1781188329961.jpg', 'createdAt': '2026-06-11T14:32:10.316Z', 'transactionId': 11, 'valid': True, 'bottle': 0, 'description': 'Green Glass Bottle'}}
+2026-06-11 09:32:09,144 - WARNING - Clasificación inválida: objeto no válido detectado
+2026-06-11 09:32:09,146 - INFO - Imagen subida exitosamente al backend
+2026-06-11 09:32:21,231 - INFO - 192.168.110.240 - - [11/Jun/2026 09:32:21] "POST /capture HTTP/1.1" 200 -
+2026-06-11 09:32:21,255 - INFO - Capturando y analizando imagen...
+2026-06-11 09:32:21,522 - INFO - Detectado: Green Glass Bottle (confianza: 0.80)
+2026-06-11 09:32:21,523 - INFO - Detección completa - Válido: False, Botellas: 0
+2026-06-11 09:32:24,592 - INFO - Subiendo imagen (intento 1/3)
+2026-06-11 09:32:24,611 - INFO - Datos: valido=False, botellas=0
+2026-06-11 09:32:25,216 - INFO - Imagen subida exitosamente: Green Glass Bottle
+2026-06-11 09:32:25,217 - INFO - Respuesta del servidor: {'message': {'id': 21, 'url': '/temp/1781188346037.jpg', 'createdAt': '2026-06-11T14:32:26.405Z', 'transactionId': 11, 'valid': True, 'bottle': 0, 'description': 'Green Glass Bottle'}}
+2026-06-11 09:32:25,218 - WARNING - Clasificación inválida: objeto no válido detectado
+2026-06-11 09:32:25,219 - INFO - Imagen subida exitosamente al backend
+2026-06-11 09:32:36,490 - INFO - 192.168.110.240 - - [11/Jun/2026 09:32:36] "POST /capture HTTP/1.1" 200 -
+2026-06-11 09:32:36,523 - INFO - Capturando y analizando imagen...
+2026-06-11 09:32:36,805 - INFO - Detectado: Green Glass Bottle (confianza: 0.85)
+2026-06-11 09:32:36,807 - INFO - Detección completa - Válido: False, Botellas: 0
+2026-06-11 09:32:39,869 - INFO - Subiendo imagen (intento 1/3)
+2026-06-11 09:32:39,907 - INFO - Datos: valido=False, botellas=0
+2026-06-11 09:32:40,472 - INFO - Imagen subida exitosamente: Green Glass Bottle
+2026-06-11 09:32:40,474 - INFO - Respuesta del servidor: {'message': {'id': 22, 'url': '/temp/1781188361334.jpg', 'createdAt': '2026-06-11T14:32:41.655Z', 'transactionId': 11, 'valid': True, 'bottle': 0, 'description': 'Green Glass Bottle'}}
+2026-06-11 09:32:40,475 - WARNING - Clasificación inválida: objeto no válido detectado
+2026-06-11 09:32:40,477 - INFO - Imagen subida exitosamente al backend
+2026-06-11 09:33:18,789 - INFO - 192.168.110.240 - - [11/Jun/2026 09:33:18] "POST /capture HTTP/1.1" 200 -
+2026-06-11 09:33:18,828 - INFO - Capturando y analizando imagen...
+2026-06-11 09:33:19,099 - INFO - Detectado: Transparet Plastic Bottle (confianza: 0.64)
+2026-06-11 09:33:19,100 - INFO - Detección completa - Válido: True, Botellas: 1
+2026-06-11 09:33:22,168 - INFO - Subiendo imagen (intento 1/3)
+2026-06-11 09:33:22,195 - INFO - Datos: valido=True, botellas=1
+2026-06-11 09:33:22,866 - INFO - Imagen subida exitosamente: Transparet Plastic Bottle
+2026-06-11 09:33:22,867 - INFO - Respuesta del servidor: {'message': {'id': 23, 'url': '/temp/1781188403627.jpg', 'createdAt': '2026-06-11T14:33:24.064Z', 'transactionId': 11, 'valid': True, 'bottle': 1, 'description': 'Transparet Plastic Bottle'}}
+2026-06-11 09:33:22,869 - INFO - Clasificación válida: 1 botella(s) detectada(s)
+2026-06-11 09:33:22,869 - INFO - Imagen subida exitosamente al backend
+2026-06-11 09:33:25,643 - INFO - Solicitud de finalización de transacción recibida
+2026-06-11 09:33:25,644 - INFO - Finalizando transacción...
+2026-06-11 09:33:25,838 - INFO - Transacción completada exitosamente: 10 puntos, 0 items
+2026-06-11 09:33:25,840 - INFO - Transacción finalizada exitosamente: Transacción completada exitosamente
+2026-06-11 09:33:25,840 - INFO - Puntos otorgados: 10
+2026-06-11 09:33:25,841 - INFO - Items escaneados: 0
+2026-06-11 09:33:25,846 - INFO - 192.168.110.240 - - [11/Jun/2026 09:33:25] "POST /finish HTTP/1.1" 200 -
+2026-06-11 09:33:26,845 - INFO - Iniciando reinicio completo de la aplicación...
+2026-06-12 20:48:14,875 - INFO - Modelo YOLO cargado: src/yolov11.pt
+2026-06-12 20:48:14,881 - INFO - Iniciando escaneo de código de barras
+2026-06-12 20:48:14,882 - INFO - Iniciando servidor Flask...
+2026-06-12 20:48:14,958 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.110.13:5000
+2026-06-12 20:48:14,959 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-12 20:48:15,998 - INFO - Cámara inicializada: 640x480
+2026-06-12 20:51:22,701 - INFO - Código detectado: 6826765434593769388167
+2026-06-12 20:51:25,015 - INFO - Codigo validado por el backend
+2026-06-12 20:51:25,624 - INFO - Iniciando clasificación de objetos
+2026-06-12 20:51:25,788 - INFO - Cámara inicializada: 640x480
+2026-06-12 20:51:25,789 - INFO - Presiona 'C' para capturar o usa el endpoint /capture
+2026-06-12 20:52:01,595 - INFO - 192.168.110.240 - - [12/Jun/2026 20:52:01] "POST /capture HTTP/1.1" 200 -
+2026-06-12 20:52:01,607 - INFO - Capturando y analizando imagen...
+2026-06-12 20:52:13,536 - INFO - Detectado: Transparent Glass Bottle (confianza: 0.89)
+2026-06-12 20:52:13,555 - INFO - Detección completa - Válido: False, Botellas: 0
+2026-06-12 20:52:16,654 - INFO - Subiendo imagen (intento 1/3)
+2026-06-12 20:52:16,690 - INFO - Datos: valido=False, botellas=0
+2026-06-12 20:52:17,361 - INFO - Imagen subida exitosamente: Transparent Glass Bottle
+2026-06-12 20:52:17,363 - INFO - Respuesta del servidor: {'message': {'id': 24, 'url': '/temp/1781315536386.jpg', 'createdAt': '2026-06-13T01:52:16.891Z', 'transactionId': 12, 'valid': True, 'bottle': 0, 'description': 'Transparent Glass Bottle'}}
+2026-06-12 20:52:17,364 - WARNING - Clasificación inválida: objeto no válido detectado
+2026-06-12 20:52:17,373 - INFO - Imagen subida exitosamente al backend
+2026-06-12 20:52:24,027 - INFO - 192.168.110.240 - - [12/Jun/2026 20:52:24] "POST /capture HTTP/1.1" 200 -
+2026-06-12 20:52:24,035 - INFO - Capturando y analizando imagen...
+2026-06-12 20:52:24,314 - INFO - Detectado: Transparent Glass Bottle (confianza: 0.88)
+2026-06-12 20:52:24,315 - INFO - Detección completa - Válido: False, Botellas: 0
+2026-06-12 20:52:27,387 - INFO - Subiendo imagen (intento 1/3)
+2026-06-12 20:52:27,444 - INFO - Datos: valido=False, botellas=0
+2026-06-12 20:52:27,798 - INFO - Imagen subida exitosamente: Transparent Glass Bottle
+2026-06-12 20:52:27,800 - INFO - Respuesta del servidor: {'message': {'id': 25, 'url': '/temp/1781315547134.jpg', 'createdAt': '2026-06-13T01:52:27.337Z', 'transactionId': 12, 'valid': True, 'bottle': 0, 'description': 'Transparent Glass Bottle'}}
+2026-06-12 20:52:27,801 - WARNING - Clasificación inválida: objeto no válido detectado
+2026-06-12 20:52:27,802 - INFO - Imagen subida exitosamente al backend
+2026-06-12 20:52:30,637 - INFO - 192.168.110.240 - - [12/Jun/2026 20:52:30] "POST /capture HTTP/1.1" 200 -
+2026-06-12 20:52:30,651 - INFO - Capturando y analizando imagen...
+2026-06-12 20:52:30,946 - INFO - Detectado: Transparent Glass Bottle (confianza: 0.55)
+2026-06-12 20:52:30,947 - INFO - Detección completa - Válido: False, Botellas: 0
+2026-06-12 20:52:34,017 - INFO - Subiendo imagen (intento 1/3)
+2026-06-12 20:52:34,074 - INFO - Datos: valido=False, botellas=0
+2026-06-12 20:52:34,723 - INFO - Imagen subida exitosamente: Transparent Glass Bottle
+2026-06-12 20:52:34,724 - INFO - Respuesta del servidor: {'message': {'id': 26, 'url': '/temp/1781315553758.jpg', 'createdAt': '2026-06-13T01:52:34.177Z', 'transactionId': 12, 'valid': True, 'bottle': 0, 'description': 'Transparent Glass Bottle'}}
+2026-06-12 20:52:34,726 - WARNING - Clasificación inválida: objeto no válido detectado
+2026-06-12 20:52:34,726 - INFO - Imagen subida exitosamente al backend
+2026-06-12 20:52:42,928 - INFO - 192.168.110.240 - - [12/Jun/2026 20:52:42] "POST /capture HTTP/1.1" 200 -
+2026-06-12 20:52:42,929 - INFO - Capturando y analizando imagen...
+2026-06-12 20:52:43,230 - INFO - Detectado: Transparent Glass Bottle (confianza: 0.83)
+2026-06-12 20:52:43,231 - INFO - Detección completa - Válido: False, Botellas: 0
+2026-06-12 20:52:46,290 - INFO - Subiendo imagen (intento 1/3)
+2026-06-12 20:52:46,329 - INFO - Datos: valido=False, botellas=0
+2026-06-12 20:52:46,811 - INFO - Imagen subida exitosamente: Transparent Glass Bottle
+2026-06-12 20:52:46,812 - INFO - Respuesta del servidor: {'message': {'id': 27, 'url': '/temp/1781315566024.jpg', 'createdAt': '2026-06-13T01:52:46.294Z', 'transactionId': 12, 'valid': True, 'bottle': 0, 'description': 'Transparent Glass Bottle'}}
+2026-06-12 20:52:46,813 - WARNING - Clasificación inválida: objeto no válido detectado
+2026-06-12 20:52:46,815 - INFO - Imagen subida exitosamente al backend
+2026-06-12 20:52:52,242 - INFO - 192.168.110.240 - - [12/Jun/2026 20:52:52] "POST /capture HTTP/1.1" 200 -
+2026-06-12 20:52:52,252 - INFO - Capturando y analizando imagen...
+2026-06-12 20:52:52,503 - INFO - Detección completa - Válido: False, Botellas: 0
+2026-06-12 20:52:55,564 - INFO - Subiendo imagen (intento 1/3)
+2026-06-12 20:52:55,601 - INFO - Datos: valido=False, botellas=0
+2026-06-12 20:52:56,351 - INFO - Imagen subida exitosamente: Sin detección
+2026-06-12 20:52:56,353 - INFO - Respuesta del servidor: {'message': {'id': 28, 'url': '/temp/1781315575500.jpg', 'createdAt': '2026-06-13T01:52:55.883Z', 'transactionId': 12, 'valid': True, 'bottle': 0, 'description': 'Sin detección'}}
+2026-06-12 20:52:56,356 - WARNING - Clasificación inválida: objeto no válido detectado
+2026-06-12 20:52:56,357 - INFO - Imagen subida exitosamente al backend
+2026-06-12 20:53:01,130 - INFO - 192.168.110.240 - - [12/Jun/2026 20:53:01] "POST /capture HTTP/1.1" 200 -
+2026-06-12 20:53:01,141 - INFO - Capturando y analizando imagen...
+2026-06-12 20:53:01,422 - INFO - Detectado: Transparent Glass Bottle (confianza: 0.51)
+2026-06-12 20:53:01,424 - INFO - Detección completa - Válido: False, Botellas: 0
+2026-06-12 20:53:04,489 - INFO - Subiendo imagen (intento 1/3)
+2026-06-12 20:53:04,526 - INFO - Datos: valido=False, botellas=0
+2026-06-12 20:53:05,263 - INFO - Imagen subida exitosamente: Transparent Glass Bottle
+2026-06-12 20:53:05,265 - INFO - Respuesta del servidor: {'message': {'id': 29, 'url': '/temp/1781315584201.jpg', 'createdAt': '2026-06-13T01:53:04.800Z', 'transactionId': 12, 'valid': True, 'bottle': 0, 'description': 'Transparent Glass Bottle'}}
+2026-06-12 20:53:05,273 - WARNING - Clasificación inválida: objeto no válido detectado
+2026-06-12 20:53:05,275 - INFO - Imagen subida exitosamente al backend
+2026-06-12 20:53:07,671 - INFO - 192.168.110.240 - - [12/Jun/2026 20:53:07] "POST /capture HTTP/1.1" 200 -
+2026-06-12 20:53:07,701 - INFO - Capturando y analizando imagen...
+2026-06-12 20:53:07,956 - INFO - Detección completa - Válido: False, Botellas: 0
+2026-06-12 20:53:11,025 - INFO - Subiendo imagen (intento 1/3)
+2026-06-12 20:53:11,080 - INFO - Datos: valido=False, botellas=0
+2026-06-12 20:53:11,714 - INFO - Imagen subida exitosamente: Sin detección
+2026-06-12 20:53:11,715 - INFO - Respuesta del servidor: {'message': {'id': 30, 'url': '/temp/1781315590766.jpg', 'createdAt': '2026-06-13T01:53:11.253Z', 'transactionId': 12, 'valid': True, 'bottle': 0, 'description': 'Sin detección'}}
+2026-06-12 20:53:11,718 - WARNING - Clasificación inválida: objeto no válido detectado
+2026-06-12 20:53:11,722 - INFO - Imagen subida exitosamente al backend
+2026-06-12 20:53:18,666 - INFO - 192.168.110.240 - - [12/Jun/2026 20:53:18] "POST /capture HTTP/1.1" 200 -
+2026-06-12 20:53:18,688 - INFO - Capturando y analizando imagen...
+2026-06-12 20:53:18,983 - INFO - Detección completa - Válido: False, Botellas: 0
+2026-06-12 20:53:22,051 - INFO - Subiendo imagen (intento 1/3)
+2026-06-12 20:53:22,076 - INFO - Datos: valido=False, botellas=0
+2026-06-12 20:53:22,678 - INFO - Imagen subida exitosamente: Sin detección
+2026-06-12 20:53:22,680 - INFO - Respuesta del servidor: {'message': {'id': 31, 'url': '/temp/1781315601775.jpg', 'createdAt': '2026-06-13T01:53:22.202Z', 'transactionId': 12, 'valid': True, 'bottle': 0, 'description': 'Sin detección'}}
+2026-06-12 20:53:22,681 - WARNING - Clasificación inválida: objeto no válido detectado
+2026-06-12 20:53:22,682 - INFO - Imagen subida exitosamente al backend
+2026-06-12 20:53:26,361 - INFO - 192.168.110.240 - - [12/Jun/2026 20:53:26] "POST /capture HTTP/1.1" 200 -
+2026-06-12 20:53:26,407 - INFO - Capturando y analizando imagen...
+2026-06-12 20:53:26,650 - INFO - Detección completa - Válido: False, Botellas: 0
+2026-06-12 20:53:29,689 - INFO - Subiendo imagen (intento 1/3)
+2026-06-12 20:53:29,690 - INFO - Datos: valido=False, botellas=0
+2026-06-12 20:53:30,241 - INFO - Imagen subida exitosamente: Sin detección
+2026-06-12 20:53:30,243 - INFO - Respuesta del servidor: {'message': {'id': 32, 'url': '/temp/1781315609353.jpg', 'createdAt': '2026-06-13T01:53:29.779Z', 'transactionId': 12, 'valid': True, 'bottle': 0, 'description': 'Sin detección'}}
+2026-06-12 20:53:30,244 - WARNING - Clasificación inválida: objeto no válido detectado
+2026-06-12 20:53:30,246 - INFO - Imagen subida exitosamente al backend
+2026-06-12 20:53:50,666 - INFO - 192.168.110.240 - - [12/Jun/2026 20:53:50] "POST /capture HTTP/1.1" 200 -
+2026-06-12 20:53:50,675 - INFO - Capturando y analizando imagen...
+2026-06-12 20:53:50,979 - INFO - Detección completa - Válido: False, Botellas: 0
+2026-06-12 20:53:54,045 - INFO - Subiendo imagen (intento 1/3)
+2026-06-12 20:53:54,091 - INFO - Datos: valido=False, botellas=0
+2026-06-12 20:53:54,616 - INFO - Imagen subida exitosamente: Sin detección
+2026-06-12 20:53:54,618 - INFO - Respuesta del servidor: {'message': {'id': 33, 'url': '/temp/1781315633752.jpg', 'createdAt': '2026-06-13T01:53:54.149Z', 'transactionId': 12, 'valid': True, 'bottle': 0, 'description': 'Sin detección'}}
+2026-06-12 20:53:54,620 - WARNING - Clasificación inválida: objeto no válido detectado
+2026-06-12 20:53:54,622 - INFO - Imagen subida exitosamente al backend
+2026-06-12 20:54:01,366 - INFO - 192.168.110.240 - - [12/Jun/2026 20:54:01] "POST /capture HTTP/1.1" 200 -
+2026-06-12 20:54:01,366 - INFO - Capturando y analizando imagen...
+2026-06-12 20:54:01,655 - INFO - Detección completa - Válido: False, Botellas: 0
+2026-06-12 20:54:04,723 - INFO - Subiendo imagen (intento 1/3)
+2026-06-12 20:54:04,752 - INFO - Datos: valido=False, botellas=0
+2026-06-12 20:54:05,364 - INFO - Imagen subida exitosamente: Sin detección
+2026-06-12 20:54:05,365 - INFO - Respuesta del servidor: {'message': {'id': 34, 'url': '/temp/1781315644503.jpg', 'createdAt': '2026-06-13T01:54:04.902Z', 'transactionId': 12, 'valid': True, 'bottle': 0, 'description': 'Sin detección'}}
+2026-06-12 20:54:05,367 - WARNING - Clasificación inválida: objeto no válido detectado
+2026-06-12 20:54:05,369 - INFO - Imagen subida exitosamente al backend
+2026-06-12 20:54:09,593 - INFO - 192.168.110.240 - - [12/Jun/2026 20:54:09] "POST /capture HTTP/1.1" 200 -
+2026-06-12 20:54:09,602 - INFO - Capturando y analizando imagen...
+2026-06-12 20:54:09,876 - INFO - Detectado: Transparent Glass Bottle (confianza: 0.73)
+2026-06-12 20:54:09,878 - INFO - Detección completa - Válido: False, Botellas: 0
+2026-06-12 20:54:12,948 - INFO - Subiendo imagen (intento 1/3)
+2026-06-12 20:54:12,973 - INFO - Datos: valido=False, botellas=0
+2026-06-12 20:54:13,672 - INFO - Imagen subida exitosamente: Transparent Glass Bottle
+2026-06-12 20:54:13,674 - INFO - Respuesta del servidor: {'message': {'id': 35, 'url': '/temp/1781315652816.jpg', 'createdAt': '2026-06-13T01:54:13.211Z', 'transactionId': 12, 'valid': True, 'bottle': 0, 'description': 'Transparent Glass Bottle'}}
+2026-06-12 20:54:13,675 - WARNING - Clasificación inválida: objeto no válido detectado
+2026-06-12 20:54:13,676 - INFO - Imagen subida exitosamente al backend
+2026-06-12 20:54:17,447 - INFO - 192.168.110.240 - - [12/Jun/2026 20:54:17] "POST /capture HTTP/1.1" 200 -
+2026-06-12 20:54:17,447 - INFO - Capturando y analizando imagen...
+2026-06-12 20:54:17,689 - INFO - Detectado: Transparent Glass Bottle (confianza: 0.77)
+2026-06-12 20:54:17,690 - INFO - Detección completa - Válido: False, Botellas: 0
+2026-06-12 20:54:20,754 - INFO - Subiendo imagen (intento 1/3)
+2026-06-12 20:54:20,815 - INFO - Datos: valido=False, botellas=0
+2026-06-12 20:54:21,635 - INFO - Imagen subida exitosamente: Transparent Glass Bottle
+2026-06-12 20:54:21,636 - INFO - Respuesta del servidor: {'message': {'id': 36, 'url': '/temp/1781315660506.jpg', 'createdAt': '2026-06-13T01:54:21.078Z', 'transactionId': 12, 'valid': True, 'bottle': 0, 'description': 'Transparent Glass Bottle'}}
+2026-06-12 20:54:21,637 - WARNING - Clasificación inválida: objeto no válido detectado
+2026-06-12 20:54:21,639 - INFO - Imagen subida exitosamente al backend
+2026-06-12 20:54:26,534 - INFO - 192.168.110.240 - - [12/Jun/2026 20:54:26] "POST /capture HTTP/1.1" 200 -
+2026-06-12 20:54:26,550 - INFO - Capturando y analizando imagen...
+2026-06-12 20:54:26,746 - INFO - Detectado: Transparent Glass Bottle (confianza: 0.67)
+2026-06-12 20:54:26,747 - INFO - Detección completa - Válido: False, Botellas: 0
+2026-06-12 20:54:29,801 - INFO - Subiendo imagen (intento 1/3)
+2026-06-12 20:54:29,846 - INFO - Datos: valido=False, botellas=0
+2026-06-12 20:54:30,438 - INFO - Imagen subida exitosamente: Transparent Glass Bottle
+2026-06-12 20:54:30,439 - INFO - Respuesta del servidor: {'message': {'id': 37, 'url': '/temp/1781315669514.jpg', 'createdAt': '2026-06-13T01:54:29.956Z', 'transactionId': 12, 'valid': True, 'bottle': 0, 'description': 'Transparent Glass Bottle'}}
+2026-06-12 20:54:30,442 - WARNING - Clasificación inválida: objeto no válido detectado
+2026-06-12 20:54:30,445 - INFO - Imagen subida exitosamente al backend
+2026-06-12 20:54:48,060 - INFO - 192.168.110.240 - - [12/Jun/2026 20:54:48] "POST /capture HTTP/1.1" 200 -
+2026-06-12 20:54:48,060 - INFO - Capturando y analizando imagen...
+2026-06-12 20:54:48,329 - INFO - Detectado: Transparent Glass Bottle (confianza: 0.80)
+2026-06-12 20:54:48,331 - INFO - Detección completa - Válido: False, Botellas: 0
+2026-06-12 20:54:51,400 - INFO - Subiendo imagen (intento 1/3)
+2026-06-12 20:54:51,449 - INFO - Datos: valido=False, botellas=0
+2026-06-12 20:54:52,068 - INFO - Imagen subida exitosamente: Transparent Glass Bottle
+2026-06-12 20:54:52,070 - INFO - Respuesta del servidor: {'message': {'id': 38, 'url': '/temp/1781315691144.jpg', 'createdAt': '2026-06-13T01:54:51.607Z', 'transactionId': 12, 'valid': True, 'bottle': 0, 'description': 'Transparent Glass Bottle'}}
+2026-06-12 20:54:52,071 - WARNING - Clasificación inválida: objeto no válido detectado
+2026-06-12 20:54:52,073 - INFO - Imagen subida exitosamente al backend
+2026-06-12 20:54:56,558 - INFO - Solicitud de finalización de transacción recibida
+2026-06-12 20:54:56,561 - INFO - Finalizando transacción...
+2026-06-12 20:54:56,765 - INFO - Transacción completada exitosamente: 0 puntos, 0 items
+2026-06-12 20:54:56,768 - INFO - Transacción finalizada exitosamente: Transacción completada exitosamente
+2026-06-12 20:54:56,770 - INFO - Puntos otorgados: 0
+2026-06-12 20:54:56,786 - INFO - Items escaneados: 0
+2026-06-12 20:54:56,805 - INFO - 192.168.110.240 - - [12/Jun/2026 20:54:56] "POST /finish HTTP/1.1" 200 -
+2026-06-12 20:54:57,804 - INFO - Iniciando reinicio completo de la aplicación...
+2026-06-12 21:05:01,851 - INFO - Modelo YOLO cargado: src/yolov11.pt
+2026-06-12 21:05:01,865 - INFO - Iniciando escaneo de código de barras
+2026-06-12 21:05:01,865 - INFO - Iniciando servidor Flask...
+2026-06-12 21:05:01,930 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.110.13:5000
+2026-06-12 21:05:01,931 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-12 21:05:03,255 - INFO - Cámara inicializada: 640x480
+2026-06-12 21:07:08,012 - INFO - Código detectado: 6826765434593769388167
+2026-06-12 21:07:09,979 - INFO - Codigo validado por el backend
+2026-06-12 21:07:10,572 - INFO - Iniciando clasificación de objetos
+2026-06-12 21:07:10,758 - INFO - Cámara inicializada: 640x480
+2026-06-12 21:07:10,759 - INFO - Presiona 'C' para capturar o usa el endpoint /capture
+2026-06-12 21:07:14,176 - INFO - 192.168.110.240 - - [12/Jun/2026 21:07:14] "POST /quit HTTP/1.1" 200 -
+2026-06-12 21:07:14,183 - INFO - Saliendo de la clasificación
+2026-06-12 21:07:14,344 - INFO - Cámara liberada
+2026-06-12 21:07:14,389 - INFO - Clasificación finalizada
+2026-06-12 21:07:14,405 - INFO - Cámara liberada
+2026-06-12 21:07:14,429 - INFO - Escaneo de código finalizado
+2026-06-12 21:07:18,099 - INFO - Reinicio forzado solicitado
+2026-06-12 21:07:18,105 - INFO - 192.168.110.240 - - [12/Jun/2026 21:07:18] "POST /force_restart HTTP/1.1" 200 -
+2026-06-12 21:07:21,104 - INFO - Reseteando estado de la aplicación...
+2026-06-12 21:07:22,106 - INFO - CameraManager reinicializado
+2026-06-12 21:07:22,106 - INFO - Estado de aplicación reseteado completamente
+2026-06-12 21:07:23,109 - INFO - Iniciando escaneo de código de barras
+2026-06-12 21:07:23,711 - INFO - Cámara inicializada: 640x480
+2026-06-12 21:07:53,853 - INFO - Código detectado: 6826765434593769388167
+2026-06-12 21:07:55,430 - WARNING - Codigo ya escaneado: El cÃ³digo ya fue escaneado anteriormente
+2026-06-12 21:08:03,094 - INFO - Código detectado: 6826765434593769388167
+2026-06-12 21:08:04,661 - WARNING - Codigo ya escaneado: El cÃ³digo ya fue escaneado anteriormente
+2026-06-12 21:09:45,788 - INFO - Código detectado: 6826765434593769388167
+2026-06-12 21:09:47,153 - WARNING - Codigo ya escaneado: El cÃ³digo ya fue escaneado anteriormente
+2026-06-12 21:17:55,674 - INFO - Modelo YOLO cargado: src/yolov11.pt
+2026-06-12 21:17:55,679 - INFO - Iniciando escaneo de código de barras
+2026-06-12 21:17:55,679 - INFO - Iniciando servidor Flask...
+2026-06-12 21:17:55,719 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.110.13:5000
+2026-06-12 21:17:55,720 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-12 21:17:56,573 - INFO - Cámara inicializada: 640x480
+2026-06-12 21:18:27,355 - INFO - Reinicio forzado solicitado
+2026-06-12 21:18:27,357 - INFO - 192.168.110.240 - - [12/Jun/2026 21:18:27] "POST /force_restart HTTP/1.1" 200 -
+2026-06-12 21:19:41,453 - INFO - Modelo YOLO cargado: src/yolov11.pt
+2026-06-12 21:19:41,458 - INFO - Iniciando escaneo de código de barras
+2026-06-12 21:19:41,458 - INFO - Iniciando servidor Flask...
+2026-06-12 21:19:41,490 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.110.13:5000
+2026-06-12 21:19:41,490 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-12 21:19:41,909 - INFO - Cámara inicializada: 640x480
+2026-06-12 21:19:46,290 - INFO - Código detectado: 6826765434593769388167
+2026-06-12 21:19:48,351 - WARNING - Codigo ya escaneado: El cÃ³digo ya fue escaneado anteriormente
+2026-06-12 21:19:52,045 - INFO - Reinicio forzado solicitado
+2026-06-12 21:19:52,047 - INFO - 192.168.110.240 - - [12/Jun/2026 21:19:52] "POST /force_restart HTTP/1.1" 200 -
+2026-06-12 21:42:59,210 - INFO - Modelo YOLO cargado: src/yolov11.pt
+2026-06-12 21:42:59,215 - INFO - Iniciando escaneo de código de barras
+2026-06-12 21:42:59,215 - INFO - Iniciando servidor Flask...
+2026-06-12 21:42:59,245 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.110.13:5000
+2026-06-12 21:42:59,246 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-12 21:43:00,142 - INFO - Cámara inicializada: 640x480
+2026-06-12 21:43:12,790 - INFO - Código detectado: 6826765434593769388167
+2026-06-12 21:43:15,058 - WARNING - Codigo ya escaneado: El cÃ³digo ya fue escaneado anteriormente
+2026-06-12 21:49:09,713 - INFO - Modelo YOLO cargado: src/yolov11.pt
+2026-06-12 21:49:09,718 - INFO - Iniciando escaneo de código de barras
+2026-06-12 21:49:09,718 - INFO - Iniciando servidor Flask...
+2026-06-12 21:49:09,758 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.110.13:5000
+2026-06-12 21:49:09,760 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-12 21:49:11,348 - INFO - Cámara inicializada: 640x480
+2026-06-12 21:49:42,235 - INFO - Código detectado: 6826765434593769388167
+2026-06-12 21:49:44,703 - INFO - Codigo validado por el backend
+2026-06-12 21:49:45,304 - INFO - Iniciando clasificación de objetos
+2026-06-12 21:49:45,471 - INFO - Cámara inicializada: 640x480
+2026-06-12 21:49:45,471 - INFO - Presiona 'C' para capturar o usa el endpoint /capture
+2026-06-12 21:49:48,337 - INFO - 192.168.110.240 - - [12/Jun/2026 21:49:48] "POST /quit HTTP/1.1" 200 -
+2026-06-12 21:49:48,344 - INFO - Saliendo de la clasificación
+2026-06-12 21:49:48,475 - INFO - Cámara liberada
+2026-06-12 21:49:48,510 - INFO - Clasificación finalizada
+2026-06-12 21:49:48,514 - INFO - Cámara liberada
+2026-06-12 21:49:48,520 - INFO - Escaneo de código finalizado
+2026-06-12 21:50:12,859 - INFO - Aplicación finalizada
+2026-06-12 21:50:31,620 - INFO - Modelo YOLO cargado: src/yolov11.pt
+2026-06-12 21:50:31,628 - INFO - Iniciando escaneo de código de barras
+2026-06-12 21:50:31,628 - INFO - Iniciando servidor Flask...
+2026-06-12 21:50:31,694 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.110.13:5000
+2026-06-12 21:50:31,695 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-12 21:50:32,910 - INFO - Cámara inicializada: 640x480
+2026-06-12 21:50:36,268 - INFO - Código detectado: 6826765434593769388167
+2026-06-12 21:50:38,152 - WARNING - Codigo ya escaneado: El cÃ³digo ya fue escaneado anteriormente
+2026-06-12 21:50:43,077 - INFO - Reinicio forzado solicitado
+2026-06-12 21:50:43,079 - INFO - 192.168.110.240 - - [12/Jun/2026 21:50:43] "POST /force_restart HTTP/1.1" 200 -
+2026-06-12 21:58:40,019 - INFO - Modelo YOLO cargado: src/yolov11.pt
+2026-06-12 21:58:40,024 - INFO - Iniciando escaneo de código de barras
+2026-06-12 21:58:40,024 - INFO - Iniciando servidor Flask...
+2026-06-12 21:58:40,081 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.110.13:5000
+2026-06-12 21:58:40,083 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-12 21:58:41,276 - INFO - Cámara inicializada: 640x480
+2026-06-12 21:59:30,804 - INFO - Código detectado: 6826765434593769388167
+2026-06-12 21:59:32,904 - INFO - Codigo validado por el backend
+2026-06-12 21:59:33,526 - INFO - Iniciando clasificación de objetos
+2026-06-12 21:59:33,742 - INFO - Cámara inicializada: 640x480
+2026-06-12 21:59:33,743 - INFO - Presiona 'C' para capturar o usa el endpoint /capture
+2026-06-12 21:59:35,771 - INFO - Reinicio forzado solicitado
+2026-06-12 21:59:35,775 - INFO - 192.168.110.240 - - [12/Jun/2026 21:59:35] "POST /force_restart HTTP/1.1" 200 -
+2026-06-12 21:59:35,795 - INFO - Reinicio solicitado - saliendo de la clasificación
+2026-06-12 22:01:09,314 - INFO - Modelo YOLO cargado: src/yolov11.pt
+2026-06-12 22:01:09,325 - INFO - Iniciando escaneo de código de barras
+2026-06-12 22:01:09,325 - INFO - Iniciando servidor Flask...
+2026-06-12 22:01:09,371 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.110.13:5000
+2026-06-12 22:01:09,371 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-12 22:01:09,768 - INFO - Cámara inicializada: 640x480
+2026-06-12 22:01:14,920 - INFO - Código detectado: 6826765434593769388167
+2026-06-12 22:01:16,672 - WARNING - Codigo ya escaneado: El cÃ³digo ya fue escaneado anteriormente
+2026-06-14 12:54:05,587 - INFO - Modelo YOLO cargado: src/yolov11.pt
+2026-06-14 12:54:05,600 - INFO - Iniciando escaneo de código de barras
+2026-06-14 12:54:05,601 - INFO - Iniciando servidor Flask...
+2026-06-14 12:54:05,723 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.110.13:5000
+2026-06-14 12:54:05,724 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-14 12:54:06,954 - INFO - Cámara inicializada: 640x480
+2026-06-14 12:54:58,342 - INFO - Código detectado: 6826765434593769388167
+2026-06-14 12:55:00,593 - INFO - Codigo validado por el backend
+2026-06-14 12:55:01,207 - INFO - Iniciando clasificación de objetos
+2026-06-14 12:55:01,302 - INFO - Cámara inicializada: 640x480
+2026-06-14 12:55:01,302 - INFO - Presiona 'C' para capturar o usa el endpoint /capture
+2026-06-14 12:55:04,829 - INFO - Reinicio forzado solicitado
+2026-06-14 12:55:04,835 - INFO - 192.168.110.240 - - [14/Jun/2026 12:55:04] "POST /force_restart HTTP/1.1" 200 -
+2026-06-14 12:55:10,098 - INFO - Reinicio forzado solicitado
+2026-06-14 12:55:10,102 - INFO - 192.168.110.240 - - [14/Jun/2026 12:55:10] "POST /force_restart HTTP/1.1" 200 -
+2026-06-14 12:55:46,154 - INFO - Modelo YOLO cargado: src/yolov11.pt
+2026-06-14 12:55:46,158 - INFO - Iniciando escaneo de código de barras
+2026-06-14 12:55:46,159 - INFO - Iniciando servidor Flask...
+2026-06-14 12:55:46,173 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.110.13:5000
+2026-06-14 12:55:46,173 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-14 12:55:46,612 - INFO - Cámara inicializada: 640x480
+2026-06-14 12:55:52,053 - INFO - Código detectado: 6826765434593769388167
+2026-06-14 12:55:54,021 - WARNING - Codigo ya escaneado: El cÃ³digo ya fue escaneado anteriormente
+2026-06-14 12:56:24,031 - INFO - Modelo YOLO cargado: src/yolov11.pt
+2026-06-14 12:56:24,040 - INFO - Iniciando escaneo de código de barras
+2026-06-14 12:56:24,040 - INFO - Iniciando servidor Flask...
+2026-06-14 12:56:24,099 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.110.13:5000
+2026-06-14 12:56:24,100 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-14 12:56:24,555 - INFO - Cámara inicializada: 640x480
+2026-06-14 12:56:29,068 - INFO - Código detectado: 6826765434593769388167
+2026-06-14 12:56:31,086 - WARNING - Codigo ya escaneado: El cÃ³digo ya fue escaneado anteriormente
+2026-06-14 12:59:42,174 - INFO - Reinicio forzado solicitado
+2026-06-14 12:59:42,179 - INFO - 192.168.110.240 - - [14/Jun/2026 12:59:42] "POST /force_restart HTTP/1.1" 200 -

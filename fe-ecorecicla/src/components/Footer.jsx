@@ -104,7 +104,7 @@ export default function Footer() {
                     <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
                     <div className="sm:flex sm:items-center sm:justify-between">
                         <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-                            ©2025 <a href="/" className="hover:underline">Ecorecicla™</a>. Todos los derechos reservados.
+                            ©2026 <a href="/" className="hover:underline">Ecorecicla™</a>. Todos los derechos reservados.
                         </span>
                     </div>
                 </div>
@@ -155,7 +155,7 @@ export default function Footer() {
                     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                         <div className="bg-white p-6 rounded-xl w-[90%] max-w-3xl max-h-[80vh] overflow-y-auto shadow-xl relative">
                             <h2 className="text-xl font-bold mb-4 text-[#A5AF22]">Términos y Condiciones de Uso</h2>
-                            <p className="text-xs text-gray-500 mb-4">Última actualización: 2025</p>
+                            <p className="text-xs text-gray-500 mb-4">Última actualización: 2026</p>
                             <div className="text-sm text-gray-700 space-y-4">
                                 <div>
                                     <h3 className="font-semibold">1. Información General</h3>
@@ -249,7 +249,7 @@ export default function Footer() {
                     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                         <div className="bg-white p-6 rounded-xl w-[90%] max-w-3xl max-h-[80vh] overflow-y-auto shadow-xl relative">
                             <h2 className="text-xl font-bold mb-4 text-[#A5AF22]">Política de Privacidad</h2>
-                            <p className="text-xs text-gray-500 mb-4">Última actualización: 2025</p>
+                            <p className="text-xs text-gray-500 mb-4">Última actualización: 2026</p>
                             <div className="text-sm text-gray-700 space-y-4">
                                 <div>
                                     <h3 className="font-semibold">1. Responsable del Tratamiento de Datos</h3>

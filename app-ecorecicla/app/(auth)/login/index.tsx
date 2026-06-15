@@ -51,7 +51,7 @@ export default function LoginScreen() {
         <View style={styles.container}>
             <Image source={require('../../../assets/images/Eco.png')} style={styles.logo} />
 
-            <Text style={styles.welcome}>Bienvenido de vuelta.</Text>
+            <Text style={styles.welcome}>Bienvenido</Text>
 
             {error && <Text style={{ color: 'red' }}>Nombre de usuario o contraseña incorrectos </Text>}
 

@@ -1,13 +1,17 @@
+import { useAuthSession } from '@/providers/AuthProvider';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { PlatformPressable } from '@react-navigation/elements';
 import { useLinkBuilder } from '@react-navigation/native';
 import { JSX } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import IconHome from './svg/home';
 import IconQR from './svg/qr';
+import IconLogout from './svg/logout';
 
 export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
     const { buildHref } = useLinkBuilder();
+    const { signOut } = useAuthSession();
+
     const icon: Record<string, (props: any) => JSX.Element> = {
         index: (props) => <IconHome width={24} height={24} color={props.color} />,
         qr: (props) => <IconQR width={24} height={24} color={props.color} />,
@@ -51,16 +55,18 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
                         android_ripple={{ color: 'transparent' }}
                     >
                         <View style={[isFocused && styles.iconWrapper]}>
-                            {
-                                icon[route.name]({
-                                    color: isFocused ? "#ffffff" : "#ffffff"
-                                })
-                            }
+                            {icon[route.name]({ color: '#ffffff' })}
                         </View>
-
                     </PlatformPressable>
                 );
             })}
+
+            {/* Botón de logout */}
+            <TouchableOpacity style={styles.tabbarItem} onPress={signOut}>
+                <View>
+                    <IconLogout width={24} height={24} color="#ff6b6b" />
+                </View>
+            </TouchableOpacity>
         </View>
     );
 }

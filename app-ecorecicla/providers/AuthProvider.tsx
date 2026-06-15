@@ -88,11 +88,23 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     router.replace('/(authorized)/(tabs)');
   }, []);
 
-  const signOut = useCallback(async () => {
-    await AsyncStorage.removeItem('@token');
-    tokenRef.current = null;
-    router.push('/(auth)/sign-up');
-  }, []);
+const signOut = useCallback(async () => {
+  fetch(`${process.env.EXPO_PUBLIC_API_URL}/scan/cancel`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${tokenRef.current}`,
+      'Content-Type': 'application/json',
+    },
+  }).catch(() => {});
+
+  fetch(`${process.env.EXPO_PUBLIC_SCANNER_URL}/force_restart`, {
+    method: 'POST',
+  }).catch(() => {});
+
+  await AsyncStorage.removeItem('@token');
+  tokenRef.current = null;
+  router.push('/(auth)/login');
+}, []);
 
   return (
     <AuthContext.Provider

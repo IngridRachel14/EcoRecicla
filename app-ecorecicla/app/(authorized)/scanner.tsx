@@ -186,21 +186,25 @@ export default function Success() {
     }
   };
 
-  const quitphoto = async () => {
-    try {
-      const response = await fetch(`${process.env.EXPO_PUBLIC_SCANNER_URL}/quit`, {
-        method: 'POST',
-      });
+const quitphoto = async () => {
+  try {
+    await fetch(`${process.env.EXPO_PUBLIC_API_URL}/scan/cancel`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token.current}`,
+        'Content-Type': 'application/json',
+      },
+    }).catch(() => {});
 
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(`Error ${response.status}: ${errorData.message || 'Error desconocido'}`);
-      }
-      router.replace('/(authorized)/(tabs)');
-      return;
-    } catch (error) {
-    }
-  };
+    fetch(`${process.env.EXPO_PUBLIC_SCANNER_URL}/force_restart`, {
+      method: 'POST',
+    }).catch(() => {});
+
+    router.replace('/(authorized)/(tabs)');
+  } catch (error) {
+    router.replace('/(authorized)/(tabs)');
+  }
+};
 
   const getObjectType = (item: typeof imagenes[0]) => {
     if (item.description.toLowerCase().includes('can') || item.description.toLowerCase().includes('metal')) {
