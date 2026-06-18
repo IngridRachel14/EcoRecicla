@@ -129,9 +129,9 @@ export const cancelScanError = async (req: Request, res: Response): Promise<any>
                 completed: true
             }
         })
-        setScannedCode('')
+        setScannedCode('0')  
         return res.status(200).json({ message: `transaccion terminada` });
- 
+
     } catch (error) {
         return res.status(500).json({ message: 'Internal Server Error' });
     }

@@ -89,7 +89,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
 const signOut = useCallback(async () => {
-  fetch(`${process.env.EXPO_PUBLIC_API_URL}/scan/cancel`, {
+  fetch(`${process.env.EXPO_PUBLIC_API_URL}/scan/cancel-error`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${tokenRef.current}`,

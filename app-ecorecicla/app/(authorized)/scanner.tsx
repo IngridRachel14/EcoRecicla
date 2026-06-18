@@ -188,7 +188,7 @@ export default function Success() {
 
 const quitphoto = async () => {
   try {
-    await fetch(`${process.env.EXPO_PUBLIC_API_URL}/scan/cancel`, {
+    fetch(`${process.env.EXPO_PUBLIC_API_URL}/scan/cancel-error`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token.current}`,
