@@ -14,6 +14,26 @@ from typing import Optional, Tuple, List
 from user import guardar_usuario_activo
 from settings import url_backend, API_TOKEN
 
+import signal
+
+def handle_shutdown(signum, frame):
+    logger.info("Señal de cierre recibida, cancelando sesión...")
+    try:
+        requests.post(
+            f'{url_backend}/scan/cancel',
+            headers={'Authorization': f'Bearer {API_TOKEN}'},
+            timeout=5
+        )
+        logger.info("Sesión cancelada en el backend")
+    except Exception as e:
+        logger.warning(f"No se pudo cancelar sesión: {e}")
+    finally:
+        cv2.destroyAllWindows()
+        sys.exit(0)
+
+signal.signal(signal.SIGINT, handle_shutdown)
+signal.signal(signal.SIGTERM, handle_shutdown)
+
 # Configuración de logging compatible con Windows
 logging.basicConfig(
     level=logging.INFO,
