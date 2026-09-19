@@ -58,30 +58,12 @@ export default function LoginScreen() {
             <TextInput placeholder="Email" style={styles.input} onChangeText={setEmail} />
             <TextInput placeholder="Password" secureTextEntry style={styles.input} onChangeText={setPassword} />
 
-            <TouchableOpacity>
-                <Text style={styles.forgot}>¿Olvidaste tu contraseña?</Text>
-            </TouchableOpacity>
-
 
             <TouchableOpacity style={styles.loginButton} onPress={handleLogin} disabled={loading}>
                 <Text style={styles.loginText}>{loading ? 'Ingresando...' : 'INGRESAR'}</Text>
             </TouchableOpacity>
 
-            <View style={styles.orContainer}>
-                <View style={styles.line} />
-                <Text style={styles.orText}>Or</Text>
-                <View style={styles.line} />
-            </View>
 
-            <TouchableOpacity style={styles.googleButton}>
-                <Svg width="24" height="24" viewBox="0 0 48 48">
-                    <Path fill="#fbc02d" d="M43.6 20.5H42V20H24v8h11.3C33.3 32.4 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 6.2 29.5 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 20-8 20-20 0-1.3-.1-2.7-.4-3.5z" />
-                    <Path fill="#e53935" d="M6.3 14.1l6.6 4.8C14.4 15.3 18.9 12 24 12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 6.2 29.5 4 24 4c-7.5 0-14 4.1-17.7 10.1z" />
-                    <Path fill="#4caf50" d="M24 44c5.2 0 10.2-2 13.8-5.2l-6.4-5.3c-2.1 1.6-4.7 2.5-7.4 2.5-5.2 0-9.7-3.3-11.3-8L6.1 33.9C9.8 39.9 16.3 44 24 44z" />
-                    <Path fill="#1565c0" d="M43.6 20.5H42V20H24v8h11.3c-1.2 3.2-3.5 5.9-6.7 7.5l6.4 5.3c5.1-4.6 8-11.4 8-19.3z" />
-                </Svg>
-                <Text>Sign in with Google</Text>
-            </TouchableOpacity>
 
             <TouchableOpacity style={styles.signupContainer} onPress={() => {
                 router.replace('/(auth)/sign-up');

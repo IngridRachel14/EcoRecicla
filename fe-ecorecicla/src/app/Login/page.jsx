@@ -56,6 +56,9 @@ const Login = () => {
                                 required
                                 className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A5AF22]"
                             />
+
+                          
+
                             <button
                                 type="button"
                                 onClick={() => setMostrarPassword(!mostrarPassword)}
@@ -70,6 +73,8 @@ const Login = () => {
                                 )}
                             </button>
                         </div>
+
+                        <div className="w-full flex justify-center mt-2"> <p className="text-sm text-gray-600"> ¿Olvidaste tu contraseña?{' '} <Link href="/Forgot-password" className="text-[#A5AF22] font-semibold hover:underline"> Restablécela aquí </Link> </p> </div>
 
                         <div className='w-full flex justify-center'>
                             {error && <p className="text-red-500 text-sm">{error}</p>}

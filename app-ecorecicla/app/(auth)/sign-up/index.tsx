@@ -78,10 +78,6 @@ export default function LoginScreen() {
             />
 
 
-            <TouchableOpacity>
-                <Text style={styles.forgot}>Forgot your password?</Text>
-            </TouchableOpacity>
-
             <TouchableOpacity style={styles.loginButton} onPress={handleLogin} disabled={loading}>
                 <Text style={styles.loginText}>{loading ? 'Registering in...' : 'SING-UP'}</Text>
             </TouchableOpacity>

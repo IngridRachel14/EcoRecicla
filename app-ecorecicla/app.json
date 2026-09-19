@@ -7,7 +7,6 @@
     "icon": "./assets/images/icon.png",
     "scheme": "appecorecicla",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "ios": {
       "supportsTablet": true
     },
@@ -16,7 +15,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true,
+      
       "intentFilters": [
         {
           "action": "VIEW",
@@ -50,7 +49,10 @@
           "backgroundColor": "#ffffff"
         }
       ],
-       "expo-font"
+      "expo-font",
+      "expo-image",
+      "expo-status-bar",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true

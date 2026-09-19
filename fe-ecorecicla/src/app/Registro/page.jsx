@@ -30,6 +30,11 @@ const Registro = () => {
             return;
         }
 
+        if (password.length < 8) {
+        setError('La contraseña debe tener al menos 8 caracteres.');
+        return;
+        }
+
         const resultado = await registrarUsuario(nombre, email, password);
 
         if (resultado.exito) {

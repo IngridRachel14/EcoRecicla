@@ -1,7 +1,6 @@
 import { useAuthSession } from '@/providers/AuthProvider';
-import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { PlatformPressable } from '@react-navigation/elements';
-import { useLinkBuilder } from '@react-navigation/native';
+import { BottomTabBarProps } from 'expo-router/js-tabs';
+import { PlatformPressable, useLinkBuilder } from 'expo-router/react-navigation';
 import { JSX } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import IconHome from './svg/home';

@@ -6,6 +6,7 @@ import time
 import logging
 import sys
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from playsound import playsound
 from ultralytics import YOLO
 from contextlib import contextmanager
@@ -51,7 +52,11 @@ console_handler.setLevel(logging.INFO)
 console_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 console_handler.setFormatter(console_formatter)
 
+
+
 app = Flask(__name__)
+app.config['JSON_AS_ASCII'] = False
+CORS(app)
 
 @dataclass
 class DetectionResult:
@@ -69,6 +74,8 @@ class ScannerConfig:
     MODEL_PATH: str = 'src/yolov11.pt'
     TEMP_IMAGE_PATH: str = 'temp.jpg'
     SOUND_PATH: str = os.path.join(BASE_DIR, 'sounds', 'scan.mp3')
+    SOUND_EXITO_PATH: str = os.path.join(BASE_DIR, 'sounds', 'exito_v2.mp3')
+    SOUND_ERROR_PATH: str = os.path.join(BASE_DIR, 'sounds', 'error_v2.mp3')
     CAMERA_WIDTH: int = 640
     CAMERA_HEIGHT: int = 480
     DETECTION_CONFIDENCE: float = 0.5
@@ -638,6 +645,15 @@ class ScannerApp:
                         logger.info("Capturando y analizando imagen...")
                         
                         detection_result = self.detector.detect_objects(frame)
+
+                        # Reproducir sonido según el resultado de la detección
+                        sonido_a_reproducir = self.config.SOUND_EXITO_PATH if detection_result.is_valid else self.config.SOUND_ERROR_PATH
+
+                        if os.path.exists(sonido_a_reproducir) :
+                            try:
+                                playsound(sonido_a_reproducir)
+                            except Exception as e:
+                                logger.warning(f"Error al reproducir sonido: {e}")
                         
                         # Mostrar resultado
                         cv2.imshow("Resultado de Deteccion", detection_result.frame_with_boxes)
