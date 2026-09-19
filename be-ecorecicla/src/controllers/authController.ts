@@ -97,56 +97,58 @@ export const loginUser = async (req: Request, res: Response): Promise<any> => {
 };
 
 export const requestPasswordReset = async (req: Request, res: Response): Promise<any> => {
-  const { email } = req.body;
-
-  if (!email) {
-    return res.status(400).json({ error: 'Faltan campos obligatorios' });
-  }
-
-  const user = await prisma.user.findUnique({ where: { email } });
-
-  if (!user) {
-    return res.status(404).json({ message: 'Usuario no encontrado' });
-  }
-
-  const token = crypto.randomUUID();
-  const expiresAt = new Date(Date.now() + 1000 * 60 * 60); // 1 hora
-
-  await prisma.passwordResetToken.create({
-    data: {
-      token,
-      userId: user.id,
-      expiresAt,
-    }
-  });
-
-  const resetLink = `${process.env.BASE_URL}/reset-password?token=${token}`;
-  const subject = 'Recuperación de contraseña';
-
-  const html = `
-    <div style="font-family: Arial, sans-serif; line-height: 1.6;">
-      <h2>Recuperación de contraseña</h2>
-      <p>Hola ${user.name || ''},</p>
-      <p>Has solicitado restablecer tu contraseña. Haz clic en el siguiente botón:</p>
-      <a href="${resetLink}" style="
-        display: inline-block;
-        padding: 10px 20px;
-        margin: 10px 0;
-        background-color: #007bff;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-      ">Restablecer contraseña</a>
-      <p>Este enlace expirará en 1 hora.</p>
-      <p>Si no solicitaste esto, puedes ignorar este correo.</p>
-      <p>Saludos,<br>Equipo de soporte</p>
-    </div>
-  `;
-
   try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ error: 'Faltan campos obligatorios' });
+    }
+
+    const user = await prisma.user.findUnique({ where: { email } });
+
+    if (!user) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+
+    const token = crypto.randomUUID();
+    const expiresAt = new Date(Date.now() + 1000 * 60 * 60); // 1 hora
+
+    await prisma.passwordResetToken.create({
+      data: {
+        token,
+        userId: user.id,
+        expiresAt,
+      }
+    });
+
+    const resetLink = `${process.env.BASE_URL}/reset-password?token=${token}`;
+    const subject = 'Recuperación de contraseña';
+
+    const html = `
+      <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+        <h2>Recuperación de contraseña</h2>
+        <p>Hola ${user.name || ''},</p>
+        <p>Has solicitado restablecer tu contraseña. Haz clic en el siguiente botón:</p>
+        <a href="${resetLink}" style="
+          display: inline-block;
+          padding: 10px 20px;
+          margin: 10px 0;
+          background-color: #007bff;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+        ">Restablecer contraseña</a>
+        <p>Este enlace expirará en 1 hora.</p>
+        <p>Si no solicitaste esto, puedes ignorar este correo.</p>
+        <p>Saludos,<br>Equipo de soporte</p>
+      </div>
+    `;
+
     await sendMail(user.email, subject, html);
     return res.status(200).json({ message: 'Token enviado por correo' });
+
   } catch (error) {
+    console.error('Error en requestPasswordReset:', error);
     return res.status(500).json({ message: 'Internal Server Error' });
   }
 };
