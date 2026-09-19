@@ -13,6 +13,10 @@ export const registerUser = async (req: Request, res: Response): Promise<any> =>
       return res.status(400).json({ error: 'Faltan campos obligatorios' });
     }
 
+    if (password.length < 8) {
+      return res.status(400).json({ error: 'La contraseña debe tener al menos 8 caracteres' });
+    }
+
     const existingUser = await prisma.user.findUnique({ where: { email } });
 
     if (existingUser) {
