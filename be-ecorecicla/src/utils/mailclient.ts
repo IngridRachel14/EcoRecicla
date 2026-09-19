@@ -1,27 +1,29 @@
-import nodemailer from "nodemailer";
-import type SMTPTransport from "nodemailer/lib/smtp-transport";
 
-const smtpOptions: SMTPTransport.Options = {
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT),
-  secure: false,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  }
-};
+const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
 
 export async function sendMail(to: string, subject: string, text: string) {
-    try {
-        const transporter = nodemailer.createTransport(smtpOptions);
-        const info = await transporter.sendMail({
-            from: process.env.SMTP_MAIL,
-            to: to,
-            subject: subject,
-            text: text
-        })
-        return info
-    } catch (error) {
-        throw error;
-    }
+  const response = await fetch(BREVO_API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "api-key": process.env.BREVO_API_KEY!,
+    },
+    body: JSON.stringify({
+      sender: {
+        name: "EcoRecicla",
+        email: process.env.BREVO_SENDER_EMAIL,
+      },
+      to: [{ email: to }],
+      subject: subject,
+      htmlContent: text,
+    }),
+  });
+
+  if (!response.ok) {
+    const errorBody = await response.text();
+    throw new Error(`Error al enviar correo con Brevo: ${response.status} - ${errorBody}`);
+  }
+
+  return await response.json();
 }
