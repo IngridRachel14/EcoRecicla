@@ -193,3 +193,6 @@ export const resetPassword = async (req: Request, res: Response): Promise<any> =
 
   return res.status(200).json({ message: 'Contraseña actualizada con éxito' })
 }
+export const validateToken = async (req: Request, res: Response): Promise<any> => {
+  return res.status(200).json({ valid: true });
+}
