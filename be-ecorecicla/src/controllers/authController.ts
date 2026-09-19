@@ -41,7 +41,7 @@ export const registerUser = async (req: Request, res: Response): Promise<any> =>
 
     const barcode = await generateUniqueBarcode();
 
-    await prisma.user.create({
+    const newUser = await prisma.user.create({
       data: {
         email,
         name,
@@ -53,7 +53,23 @@ export const registerUser = async (req: Request, res: Response): Promise<any> =>
       }
     });
 
-    return res.status(201).json({ message: 'Usuario registrado correctamente' });
+    const token = jwt.sign(
+  {
+    id: newUser.id,
+    email: newUser.email,
+    roleId: newUser.roleId,
+    name: newUser.name,
+    barcode: newUser.barcode
+  },
+  process.env.JWT_SECRET!,
+  {
+    expiresIn: '1d',
+  }
+);
+
+    
+
+    return res.status(201).json({ message: 'Usuario registrado correctamente', token:token });
 
   } catch (error) {
     return res.status(500).json({ message: 'Internal Server Error' });
