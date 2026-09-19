@@ -172,6 +172,12 @@ export const resetPassword = async (req: Request, res: Response): Promise<any> =
     return res.status(400).json({ error: 'Faltan campos obligatorios' });
   }
 
+  // Verifica que la nueva contraseña no sea igual a la actual
+  const esLaMisma = await Bun.password.verify(password, tokenRecord.user.password);
+  if (esLaMisma) {
+    return res.status(400).json({ message: 'La nueva contraseña debe ser diferente a la actual' });
+  }
+
   const hashedPassword = await Bun.password.hash(password, {
     algorithm: "bcrypt"
   });
@@ -186,8 +192,4 @@ export const resetPassword = async (req: Request, res: Response): Promise<any> =
   })
 
   return res.status(200).json({ message: 'Contraseña actualizada con éxito' })
-}
-
-export const validateToken = async (req: Request, res: Response): Promise<any> => {
-  return res.status(200).json({ valid: true });
 }
