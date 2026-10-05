@@ -57,7 +57,7 @@ const RestablecerPasswordForm = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[url('/fondo-login.jpg')] bg-cover bg-center flex items-center justify-center px-4">
+        <div className="min-h-screen bg-[url('/fondo-reset-password.jpg')] bg-cover bg-center flex items-center justify-center px-4">
             <div className="bg-white bg-opacity-90 p-10 rounded-2xl shadow-xl w-full max-w-md flex flex-col items-center">
                 <Link href="/Home">
                     <img src="/Eco2.png" alt="Logo" className="w-48 h-full mb-6 cursor-pointer" />
