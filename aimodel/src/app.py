@@ -71,7 +71,7 @@ class DetectionResult:
 class ScannerConfig:
     """Configuración centralizada del sistema"""
     BASE_DIR: str = os.path.dirname(os.path.abspath(__file__))
-    MODEL_PATH: str = 'src/yolov11.pt'
+    MODEL_PATH: str = 'src/best.pt'
     TEMP_IMAGE_PATH: str = 'temp.jpg'
     SOUND_PATH: str = os.path.join(BASE_DIR, 'sounds', 'scan.mp3')
     SOUND_EXITO_PATH: str = os.path.join(BASE_DIR, 'sounds', 'exito_v2.mp3')
@@ -87,10 +87,10 @@ class ScannerConfig:
 
     def __post_init__(self):
         if self.VALID_CLASSES is None:
-            self.VALID_CLASSES = ['Transparet Plastic Bottle', 'PET']
+            self.VALID_CLASSES = ['PET']
         if self.BOTTLE_CLASSES is None:
             # Clases que se consideran botellas para el conteo
-            self.BOTTLE_CLASSES = ['Transparet Plastic Bottle', 'PET', 'bottle', 'plastic bottle']
+            self.BOTTLE_CLASSES = ['PET']
 
 class CameraManager:
     """Manejo seguro de la cámara"""
