@@ -77,7 +77,7 @@ const RestablecerPasswordForm = () => {
                     <div className="relative">
                         <input
                             type={mostrarPassword ? "text" : "password"}
-                            placeholder="Nueva contraseña"
+                            placeholder="Nueva contraseña (mínimo 8 caracteres)"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required

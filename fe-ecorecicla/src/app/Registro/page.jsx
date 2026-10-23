@@ -82,7 +82,7 @@ const Registro = () => {
                         <div className="relative">
                             <input
                                 type={mostrarPassword ? "text" : "password"}
-                                placeholder="Contraseña"
+                                placeholder="Contraseña (mínimo 8 caracteres)"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
@@ -102,6 +102,7 @@ const Registro = () => {
                                 )}
                             </button>
                         </div>
+                        
 
                         {/* Checkbox de Términos y Condiciones */}
                         <div className="flex items-center gap-2 mt-4 ml-1">
