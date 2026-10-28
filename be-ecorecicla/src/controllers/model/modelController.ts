@@ -196,29 +196,48 @@ export const getImagesByTransaction = async (req: Request, res: Response): Promi
     }
 }
  
+
 export const getTransactionHistory = async (req: Request, res: Response): Promise<any> => {
-    const userId = req.user.id;
- 
-    const transactions = await prisma.transaction.findMany({
-        where: { userId, completed: true },
-        orderBy: { createdAt: 'desc' },
-        include: {
-            itemscanned: true
-        }
-    });
- 
-    const result = transactions.map(tx => ({
-        id: tx.id,
-        createdAt: tx.createdAt,
-        totalPoints: tx.totalPoints,
-        items: tx.itemscanned.map(img => ({
-            ...img,
-            url: `http://67.205.137.87:3000/uploads/${path.basename(img.url)}`
-        }))
-    }));
- 
-    res.status(200).json({ transactions: result });
+    try {
+        const userId = req.user.id;
+
+        const transactions = await prisma.transaction.findMany({
+            where: {
+                userId,
+                completed: true
+            },
+            orderBy: [
+                { createdAt: 'asc' },
+                { id: 'asc' }
+            ],
+            include: {
+                itemscanned: true
+            }
+        });
+
+        const result = transactions.map((tx, index) => ({
+            id: tx.id,
+            transactionNumber: index + 1,
+            createdAt: tx.createdAt,
+            totalPoints: tx.totalPoints,
+            items: tx.itemscanned.map(img => ({
+                ...img,
+                url: `http://67.205.137.87:3000/uploads/${path.basename(img.url)}`
+            }))
+        }));
+
+        // Mostrar primero las transacciones más recientes.
+        result.reverse();
+
+        return res.status(200).json({ transactions: result });
+    } catch (error) {
+        console.error('Error al obtener el historial de transacciones:', error);
+        return res.status(500).json({
+            message: 'Error al obtener el historial de transacciones'
+        });
+    }
 };
+
  
 export const completeTransaction = async (req: Request, res: Response): Promise<any> => {
     try {
