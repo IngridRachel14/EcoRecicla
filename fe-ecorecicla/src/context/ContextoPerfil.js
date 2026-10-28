@@ -34,13 +34,35 @@ export function usePerfil() {
           setRankingPosicion(ranking.currentUser.rank);
         }
 
+        
+
+
+        // 3. Historial
+        
         // 3. Historial
         const resHistorial = await authFetch("/scan/history", token);
         const historialData = await resHistorial.json();
+
         if (resHistorial.ok && Array.isArray(historialData.transactions)) {
-          setBotellas(historialData.transactions.length);
+          const totalBotellas = historialData.transactions.reduce(
+            (total, transaction) => {
+              const botellasValidas = (transaction.items || []).filter(
+                (item) => item.valid === true
+              );
+
+              return total + botellasValidas.reduce(
+                (suma, item) => suma + Number(item.bottle || 0),
+                0
+              );
+            },
+            0
+          );
+
+          setBotellas(totalBotellas);
           setHistorial(historialData);
         }
+
+
       } catch (err) {
         console.error("❌ Error al cargar los datos:", err);
       } finally {

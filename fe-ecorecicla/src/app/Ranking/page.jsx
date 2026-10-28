@@ -139,8 +139,8 @@ const RankingPage = () => {
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
                   <Botella style={{ width: 13, height: 13, color: "#a8d87a" }} />
-                  <span style={{ color: "#a8d87a", fontWeight: 700, fontSize: "0.9rem" }}>{currentUser.totalPoints}</span>
-                  <span style={{ color: "rgba(255,255,255,0.35)", fontSize: "0.68rem" }}>pts</span>
+                  <span style={{ color: "#a8d87a", fontWeight: 700, fontSize: "0.9rem" }}>{currentUser.totalBottles}</span>
+                  <span style={{ color: "rgba(255,255,255,0.35)", fontSize: "0.68rem" }}>botellas</span>
                 </div>
               </div>
             )}
@@ -148,7 +148,7 @@ const RankingPage = () => {
             <div style={{ display: "flex", alignItems: "center", padding: "0.6rem 1.5rem", background: "#f4faee" }}>
               <span style={{ fontSize: "0.6rem", fontWeight: 700, color: "#7aaa5a", letterSpacing: "0.12em", width: 40 }}>#</span>
               <span style={{ fontSize: "0.6rem", fontWeight: 700, color: "#7aaa5a", letterSpacing: "0.12em", flex: 1 }}>RECICLADOR</span>
-              <span style={{ fontSize: "0.6rem", fontWeight: 700, color: "#7aaa5a", letterSpacing: "0.12em" }}>PUNTOS</span>
+              <span style={{ fontSize: "0.6rem", fontWeight: 700, color: "#7aaa5a", letterSpacing: "0.12em" }}>BOTELLAS</span>
             </div>
 
             {top10.map((user, index) => {
@@ -181,8 +181,8 @@ const RankingPage = () => {
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: 5, flexShrink: 0 }}>
                       <Botella style={{ width: 13, height: 13, color: "#5a9a3c" }} />
-                      <span style={{ fontSize: "0.88rem", fontWeight: 700, color: "#2d5a1b" }}>{user.totalPoints}</span>
-                      <span style={{ fontSize: "0.65rem", color: "#8aab6a" }}>pts</span>
+                      <span style={{ fontSize: "0.88rem", fontWeight: 700, color: "#2d5a1b" }}>{user.totalBottles}</span>
+                      <span style={{ fontSize: "0.65rem", color: "#8aab6a" }}>botellas</span>
                     </div>
                   </div>
                 );
@@ -214,8 +214,8 @@ const RankingPage = () => {
                   </span>
                   <div style={{ display: "flex", alignItems: "center", gap: 5, flexShrink: 0 }}>
                     <Botella style={{ width: 13, height: 13, color: "#5a9a3c" }} />
-                    <span style={{ fontSize: "0.88rem", fontWeight: 700, color: "#2d5a1b" }}>{user.totalPoints}</span>
-                    <span style={{ fontSize: "0.65rem", color: "#8aab6a" }}>pts</span>
+                    <span style={{ fontSize: "0.88rem", fontWeight: 700, color: "#2d5a1b" }}>{user.totalBottles}</span>
+                    <span style={{ fontSize: "0.65rem", color: "#8aab6a" }}>botellas</span>
                   </div>
                 </div>
               );
