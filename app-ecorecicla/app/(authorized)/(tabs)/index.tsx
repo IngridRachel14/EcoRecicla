@@ -138,7 +138,7 @@ export default function Index() {
               <View style={styles.transactionHeader}>
                 <View>
                   <Text style={styles.transactionTitle}>
-                    Transacción #{transaction.id}
+                    Transacción #{transaction.transactionNumber}
                   </Text>
                   <View style={styles.dateContainer}>
                     <Ionicons name="calendar" size={16} color="white" />

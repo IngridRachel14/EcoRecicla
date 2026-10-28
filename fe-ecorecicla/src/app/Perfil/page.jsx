@@ -88,7 +88,7 @@ export default function PerfilPage() {
                 >
                   <div className="bg-lime-900 p-5 text-center rounded-t-3xl">
                     <h3 className="text-lg font-semibold text-white">
-                      Transacción #{tx.id}
+                      Transacción #{tx.transactionNumber}
                     </h3>
                   </div>
                   <div className="bg-white p-6 text-emerald-900 rounded-b-3xl">

@@ -1,14 +1,16 @@
 import { useAuthSession } from '@/providers/AuthProvider';
+import { useRouter, type Href } from 'expo-router';
 import { BottomTabBarProps } from 'expo-router/js-tabs';
 import { PlatformPressable, useLinkBuilder } from 'expo-router/react-navigation';
 import { JSX } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import IconHome from './svg/home';
-import IconQR from './svg/qr';
 import IconLogout from './svg/logout';
+import IconQR from './svg/qr';
 
-export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
+export function TabBar({ state, descriptors }: BottomTabBarProps) {
     const { buildHref } = useLinkBuilder();
+    const router = useRouter();
     const { signOut } = useAuthSession();
 
     const icon: Record<string, (props: any) => JSX.Element> = {
@@ -23,22 +25,9 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
                 const isFocused = state.index === index;
 
                 const onPress = () => {
-                    const event = navigation.emit({
-                        type: 'tabPress',
-                        target: route.key,
-                        canPreventDefault: true,
-                    });
-
-                    if (!isFocused && !event.defaultPrevented) {
-                        navigation.navigate(route.name, route.params);
-                    }
-                };
-
-                const onLongPress = () => {
-                    navigation.emit({
-                        type: 'tabLongPress',
-                        target: route.key,
-                    });
+                    if (isFocused) return;
+                    const href = buildHref(route.name, route.params);
+                    if (href) router.navigate(href as Href);
                 };
 
                 return (
@@ -49,7 +38,6 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
                         accessibilityLabel={options.tabBarAccessibilityLabel}
                         testID={options.tabBarButtonTestID}
                         onPress={onPress}
-                        onLongPress={onLongPress}
                         style={styles.tabbarItem}
                         android_ripple={{ color: 'transparent' }}
                     >
@@ -84,7 +72,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowRadius: 10,
         shadowOpacity: 0.1,
-        elevation: 5
+        elevation: 5,
     },
     tabbarItem: {
         flex: 1,
@@ -97,5 +85,5 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 30,
         backgroundColor: '#318b60',
-    }
+    },
 });
