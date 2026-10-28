@@ -93,34 +93,30 @@ class ScannerConfig:
             self.BOTTLE_CLASSES = ['Transparet Plastic Bottle', 'PET', 'bottle', 'plastic bottle']
 
 class CameraManager:
-    """Manejo seguro de la cámara"""
-    
+    """Manejo de la cámara. Se abre UNA vez y se mantiene abierta."""
+
     def __init__(self, camera_id: int = 0):
         self.camera_id = camera_id
         self.cap = None
-    
-    @contextmanager
-    def get_camera(self, width: int = 640, height: int = 480):
-        """Context manager para manejo seguro de la cámara"""
-        try:
-            self.cap = cv2.VideoCapture(self.camera_id)
-            if not self.cap.isOpened():
-                raise RuntimeError("No se pudo abrir la cámara")
-            
-            self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
-            self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
-            
-            logger.info(f"Cámara inicializada: {width}x{height}")
-            yield self.cap
-            
-        except Exception as e:
-            logger.error(f"Error al inicializar cámara: {e}")
-            raise
-        finally:
-            if self.cap:
-                self.cap.release()
-                cv2.destroyAllWindows()
-                logger.info("Cámara liberada")
+
+    def open(self, width: int = 640, height: int = 480):
+        self.release()
+        cap = cv2.VideoCapture(self.camera_id)
+        if not cap.isOpened():
+            cap.release()
+            raise RuntimeError("No se pudo abrir la cámara")
+
+        cap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
+        cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
+        self.cap = cap
+        logger.info(f"Cámara inicializada: {width}x{height}")
+        return cap
+
+    def release(self):
+        if self.cap is not None:
+            self.cap.release()
+            self.cap = None
+            logger.info("Cámara liberada")
 
 class BackendClient:
     """Cliente para comunicación con el backend"""
@@ -432,349 +428,248 @@ class ObjectDetector:
             )
 
 class ScannerApp:
-    """Aplicación principal de escaneo"""
-    
+    """Aplicación principal de escaneo.
+
+    REGLA DE ORO: toda interacción con OpenCV (cámara, imshow, waitKey,
+    destroyWindow) ocurre en UN SOLO hilo, el "worker". Los endpoints de Flask
+    nunca tocan la cámara ni las ventanas: solo cambian banderas, y el worker
+    reacciona a ellas. Así Windows no deja la ventana en "No responde".
+    """
+
+    MODE_SCAN = 'scan'
+    MODE_CLASSIFY = 'classify'
+
+    WIN_SCAN = 'Escaner de codigo'
+    WIN_CLASSIFY = 'Clasificacion YOLO - Presiona C para capturar'
+    WIN_RESULT = 'Resultado de Deteccion'
+
     def __init__(self):
         self.config = ScannerConfig()
         self.camera_manager = CameraManager()
         self.backend_client = BackendClient(url_backend, API_TOKEN, self.config.REQUEST_TIMEOUT)
         self.detector = ObjectDetector(self.config.MODEL_PATH, self.config)
-        
-        # Banderas de control
-        self._capture_flag = False
-        self._quit_flag = False
-        self._scanning_active = False
-        self._classification_active = False
-        self._restart_flag = False  # Nueva bandera para reinicio
-        
-        # Lock para thread safety
+        self.qr_detector = cv2.QRCodeDetector()
+
         self._lock = threading.Lock()
-    
+        self._mode = self.MODE_SCAN
+        self._capture_flag = False
+        self._quit_flag = False  # "volver al escaneo de QR"
+        self._stop_event = threading.Event()
+        self._worker: Optional[threading.Thread] = None
+
+    # ---------- banderas (seguras entre hilos) ----------
     @property
     def capture_flag(self) -> bool:
         with self._lock:
             return self._capture_flag
-    
+
     @capture_flag.setter
     def capture_flag(self, value: bool):
         with self._lock:
             self._capture_flag = value
-    
+
     @property
     def quit_flag(self) -> bool:
         with self._lock:
             return self._quit_flag
-    
+
     @quit_flag.setter
     def quit_flag(self, value: bool):
         with self._lock:
             self._quit_flag = value
-    
+
     @property
-    def restart_flag(self) -> bool:
+    def mode(self) -> str:
         with self._lock:
-            return self._restart_flag
-    
-    @restart_flag.setter
-    def restart_flag(self, value: bool):
+            return self._mode
+
+    def is_running(self) -> bool:
+        return self._worker is not None and self._worker.is_alive()
+
+    # ---------- control del hilo ----------
+    def start_scanning(self) -> bool:
+        """Arranca el hilo de cámara si no está corriendo."""
         with self._lock:
-            self._restart_flag = value
-    
-    def reset_app_state(self):
-        """Resetea todos los estados de la aplicación"""
-        logger.info("Reseteando estado de la aplicación...")
-        
-        with self._lock:
-            # Detener todas las actividades
-            self._scanning_active = False
-            self._classification_active = False
+            if self._worker is not None and self._worker.is_alive():
+                return False
+            self._stop_event.clear()
+            self._mode = self.MODE_SCAN
             self._capture_flag = False
             self._quit_flag = False
-            self._restart_flag = False
-        
-        # Cerrar todas las ventanas de OpenCV
-        cv2.destroyAllWindows()
-        
-        # Pequeña pausa para asegurar limpieza
-        time.sleep(1)
-        
-        # Reinicializar componentes si es necesario
-        try:
-            self.camera_manager = CameraManager()
-            logger.info("CameraManager reinicializado")
-        except Exception as e:
-            logger.warning(f"Error al reinicializar CameraManager: {e}")
-        
-        logger.info("Estado de aplicación reseteado completamente")
-    
-    def restart_application(self):
-        """Reinicia completamente la aplicación"""
-        logger.info("Iniciando reinicio completo de la aplicación...")
-        cv2.destroyAllWindows()
-        # Señalar reinicio a todos los procesos activos
-        self.restart_flag = True
-        
-        # Detener todas las actividades actuales
-        self.reset_app_state()
-        
-        # Iniciar nuevo ciclo de escaneo después de un breve delay
-        def delayed_restart():
-            time.sleep(2)  # Esperar a que se complete la limpieza
-            if not self._scanning_active:  # Solo si no hay escaneo activo
-                logger.info("Iniciando nuevo ciclo de escaneo después del reinicio")
-                self.start_scanning()
-        
-        restart_thread = threading.Thread(target=delayed_restart, daemon=True)
-        restart_thread.start()
-        
-        logger.info("Reinicio programado exitosamente")
-    
-    def scan_barcode(self):
-        """Escanea códigos de barras"""
-        if self._scanning_active:
-            logger.warning("Ya hay un escaneo activo")
-            return
-        
-        self._scanning_active = True
-        logger.info("Iniciando escaneo de código de barras")
-        
-        try:
-            with self.camera_manager.get_camera(
-                self.config.CAMERA_WIDTH, 
-                self.config.CAMERA_HEIGHT
-            ) as cap:
-                
-                while self._scanning_active and not self.restart_flag:
-                    ret, frame = cap.read()
-                    if not ret:
-                        logger.error("No se pudo leer frame de la cámara")
-                        break
-                    
-                    # Verificar si se solicita reinicio
-                    if self.restart_flag:
-                        logger.info("Reinicio solicitado - saliendo del escaneo")
-                        break
-                    
-                    # Buscar códigos de barras
-                    detector = cv2.QRCodeDetector()
-                    retval, decoded_info, points, _ = detector.detectAndDecodeMulti(frame)
-                    barcodes = [info for info in (decoded_info or []) if info] if retval else []
-                    for code_data in barcodes:
-                        if code_data:
-                            logger.info(f"Código detectado: {code_data}")
-                            
-                            # Reproducir sonido
-                            if os.path.exists(self.config.SOUND_PATH):
-                                try:
-                                    playsound(self.config.SOUND_PATH)
-                                except Exception as e:
-                                    logger.warning(f"Error al reproducir sonido: {e}")
-                            
-                            # Validar con backend
-                            validation_result = self.backend_client.validate_code(code_data)
-                            
-                            if validation_result["success"]:
-                                logger.info("Codigo validado por el backend")
-                                guardar_usuario_activo(code_data)
-                                self._scanning_active = False
-                                cv2.destroyWindow("Escaner de codigo")
-                                # Pequeña pausa antes de iniciar clasificación
-                                time.sleep(0.5)
-                                if not self.restart_flag:  # Solo continuar si no hay reinicio
-                                    self.classify_objects()
-                                return
-                            elif validation_result.get("error") == "duplicate":
-                                logger.warning(f"Codigo ya escaneado: {validation_result['message']}")
-                                # Mostrar mensaje al usuario por 3 segundos
-                                self._show_duplicate_message(frame, validation_result['message'])
-                            else:
-                                logger.warning(f"Codigo rechazado: {validation_result['message']}")
-                                # Mostrar mensaje de error por 2 segundos
-                                self._show_error_message(frame, validation_result['message'])
-                    
-                    # Mostrar frame
-                    cv2.imshow('Escaner de codigo', frame)
-                    key = cv2.waitKey(1) & 0xFF
-                    if key in [27, ord('q')]:  # ESC o 'q'
-                        break
-                        
-        except Exception as e:
-            logger.error(f"Error durante el escaneo: {e}")
-        finally:
-            self._scanning_active = False
-            logger.info("Escaneo de código finalizado")
-    
-    def classify_objects(self):
-        """Clasifica objetos usando YOLO"""
-        if self._classification_active:
-            logger.warning("Ya hay una clasificación activa")
-            return
-        
-        self._classification_active = True
-        logger.info("Iniciando clasificación de objetos")
-        
-        try:
-            with self.camera_manager.get_camera(
-                self.config.CAMERA_WIDTH, 
-                self.config.CAMERA_HEIGHT
-            ) as cap:
-                
-                logger.info("Presiona 'C' para capturar o usa el endpoint /capture")
-                
-                while self._classification_active and not self.restart_flag:
-                    ret, frame = cap.read()
-                    if not ret:
-                        logger.error("Error al leer frame de la cámara")
-                        break
-                    
-                    # Verificar si se solicita reinicio
-                    if self.restart_flag:
-                        logger.info("Reinicio solicitado - saliendo de la clasificación")
-                        break
-                    
-                    # Mostrar frame en vivo
-                    cv2.imshow("Clasificacion YOLO - Presiona C para capturar", frame)
-                    
-                    key = cv2.waitKey(1) & 0xFF
-                    
-                    # Capturar imagen
-                    if key == ord('c') or self.capture_flag:
-                        if self.restart_flag:  # Verificar reinicio antes de procesar
-                            break
-                            
-                        logger.info("Capturando y analizando imagen...")
-                        
-                        detection_result = self.detector.detect_objects(frame)
-
-                        # Reproducir sonido según el resultado de la detección
-                        sonido_a_reproducir = self.config.SOUND_EXITO_PATH if detection_result.is_valid else self.config.SOUND_ERROR_PATH
-
-                        if os.path.exists(sonido_a_reproducir) :
-                            try:
-                                playsound(sonido_a_reproducir)
-                            except Exception as e:
-                                logger.warning(f"Error al reproducir sonido: {e}")
-                        
-                        # Mostrar resultado
-                        cv2.imshow("Resultado de Deteccion", detection_result.frame_with_boxes)
-                        cv2.waitKey(self.config.RESULT_DISPLAY_TIME)
-                        cv2.destroyWindow("Resultado de Deteccion")
-                        
-                        # Subir al backend con información de validez y conteo
-                        upload_result = self.backend_client.upload_image(detection_result.frame_with_boxes, detection_result)
-                        
-                        if detection_result.is_valid:
-                            logger.info(f"Clasificación válida: {detection_result.bottle_count} botella(s) detectada(s)")
-                        else:
-                            logger.warning("Clasificación inválida: objeto no válido detectado")
-                        
-                        if upload_result["success"]:
-                            logger.info("Imagen subida exitosamente al backend")
-                        elif upload_result.get("status_code") == 409:
-                            logger.warning("Imagen duplicada en el backend - continuando")
-                        else:
-                            logger.error(f"Error al subir imagen: {upload_result.get('error', 'Error desconocido')}")
-                        
-                        self.capture_flag = False
-                    
-                    # Salir
-                    elif key in [27, ord('q')] or self.quit_flag:
-                        logger.info("Saliendo de la clasificación")
-                        self.quit_flag = False
-                        break
-                        
-        except Exception as e:
-            logger.error(f"Error durante la clasificación: {e}")
-        finally:
-            self._classification_active = False
-            logger.info("Clasificación finalizada")
-    
-    def _show_duplicate_message(self, frame, message):
-        """Muestra mensaje de código duplicado"""
-        try:
-            display_frame = frame.copy()
-            
-            # Configurar el texto
-            text = f"CODIGO YA ESCANEADO"
-            sub_text = message[:50] + "..." if len(message) > 50 else message
-            
-            # Dimensiones del frame
-            height, width = display_frame.shape[:2]
-            
-            # Fondo semi-transparente
-            overlay = display_frame.copy()
-            cv2.rectangle(overlay, (0, height//2 - 60), (width, height//2 + 60), (0, 0, 200), -1)
-            cv2.addWeighted(overlay, 0.7, display_frame, 0.3, 0, display_frame)
-            
-            # Texto principal
-            font_scale = min(width/800, 1.5)
-            cv2.putText(display_frame, text, (50, height//2), cv2.FONT_HERSHEY_SIMPLEX, font_scale, (255, 255, 255), 2)
-            cv2.putText(display_frame, sub_text, (50, height//2 + 30), cv2.FONT_HERSHEY_SIMPLEX, font_scale*0.6, (200, 200, 200), 1)
-            
-            cv2.imshow('Escaner de codigo', display_frame)
-            cv2.waitKey(3000)  # Mostrar por 3 segundos
-            
-        except Exception as e:
-            logger.error(f"Error mostrando mensaje duplicado: {e}")
-    
-    def _show_error_message(self, frame, message):
-        """Muestra mensaje de error"""
-        try:
-            display_frame = frame.copy()
-            
-            # Configurar el texto
-            text = f"CODIGO INVALIDO"
-            sub_text = message[:50] + "..." if len(message) > 50 else message
-            
-            # Dimensiones del frame
-            height, width = display_frame.shape[:2]
-            
-            # Fondo semi-transparente
-            overlay = display_frame.copy()
-            cv2.rectangle(overlay, (0, height//2 - 60), (width, height//2 + 60), (0, 0, 255), -1)
-            cv2.addWeighted(overlay, 0.7, display_frame, 0.3, 0, display_frame)
-            
-            # Texto principal
-            font_scale = min(width/800, 1.5)
-            cv2.putText(display_frame, text, (50, height//2), cv2.FONT_HERSHEY_SIMPLEX, font_scale, (255, 255, 255), 2)
-            cv2.putText(display_frame, sub_text, (50, height//2 + 30), cv2.FONT_HERSHEY_SIMPLEX, font_scale*0.6, (200, 200, 200), 1)
-            
-            cv2.imshow('Escaner de codigo', display_frame)
-            cv2.waitKey(2000)  # Mostrar por 2 segundos
-            
-        except Exception as e:
-            logger.error(f"Error mostrando mensaje de error: {e}")
-            
-    def _quit_application(self):
-        """Cierra la aplicación de forma segura"""
-        try:
-            # Establecer banderas de salida
-            self._scanning_active = False
-            self._classification_active = False
-            self.quit_flag = True
-            
-            # Cerrar todas las ventanas de OpenCV
-            cv2.destroyAllWindows()
-            
-            # Pequeña pausa para permitir que se cierren las ventanas
-            time.sleep(1)
-            
-            # Forzar salida del programa
-            import os
-            os._exit(0)
-            
-        except Exception as e:
-            print(f"Error al cerrar aplicación: {e}")
-            import os
-            os._exit(1)
-    
-    def start_scanning(self):
-        """Inicia el hilo de escaneo"""
-        if not self._scanning_active and not self.restart_flag:
-            scanning_thread = threading.Thread(target=self.scan_barcode, daemon=True)
-            scanning_thread.start()
+            self._worker = threading.Thread(target=self._run, daemon=True)
+            self._worker.start()
             return True
-        return False
+
+    def stop(self):
+        """Pide al hilo que cierre cámara y ventanas, y espera a que termine."""
+        self._stop_event.set()
+        worker = self._worker
+        if worker is not None and worker.is_alive() and worker is not threading.current_thread():
+            worker.join(timeout=5)
+
+    def request_return_to_scan(self):
+        """Pide volver al escaneo de QR (terminar o cancelar). Lo ejecuta el worker."""
+        self.quit_flag = True
+
+    # ---------- hilo de cámara ----------
+    def _run(self):
+        logger.info("Hilo de cámara iniciado")
+        try:
+            cap = self.camera_manager.open(self.config.CAMERA_WIDTH, self.config.CAMERA_HEIGHT)
+            while not self._stop_event.is_set():
+                if self.mode == self.MODE_SCAN:
+                    self._scan_step(cap)
+                else:
+                    self._classify_step(cap)
+        except Exception as e:
+            logger.error(f"Error en el hilo de cámara: {e}")
+        finally:
+            # Esto corre en el MISMO hilo que creó las ventanas
+            self.camera_manager.release()
+            self._close_windows()
+            logger.info("Hilo de cámara finalizado")
+
+    def _close_windows(self):
+        """Cierra ventanas. SOLO debe llamarse desde el hilo de cámara."""
+        try:
+            cv2.destroyAllWindows()
+            for _ in range(3):
+                cv2.waitKey(1)  # deja que Windows procese el cierre
+        except Exception as e:
+            logger.warning(f"Error al cerrar ventanas: {e}")
+
+    def _switch_mode(self, new_mode: str):
+        """Cambia de modo. SOLO desde el hilo de cámara."""
+        self._close_windows()
+        with self._lock:
+            self._mode = new_mode
+            self._capture_flag = False
+            self._quit_flag = False
+        logger.info(f"Modo cambiado a: {new_mode}")
+
+    def _play_sound(self, path: str):
+        """Reproduce sonido en segundo plano para no congelar la ventana."""
+        if not os.path.exists(path):
+            return
+
+        def _play():
+            try:
+                playsound(path)
+            except Exception as e:
+                logger.warning(f"Error al reproducir sonido: {e}")
+
+        threading.Thread(target=_play, daemon=True).start()
+
+    # ---------- modo: escaneo de QR ----------
+    def _scan_step(self, cap):
+        ret, frame = cap.read()
+        if not ret:
+            raise RuntimeError("No se pudo leer frame de la cámara")
+
+        retval, decoded_info, points, _ = self.qr_detector.detectAndDecodeMulti(frame)
+        codes = [info for info in (decoded_info or []) if info] if retval else []
+
+        for code_data in codes:
+            logger.info(f"Código detectado: {code_data}")
+            self._play_sound(self.config.SOUND_PATH)
+
+            validation_result = self.backend_client.validate_code(code_data)
+
+            if validation_result["success"]:
+                logger.info("Codigo validado por el backend")
+                guardar_usuario_activo(code_data)
+                self._switch_mode(self.MODE_CLASSIFY)
+                return
+            elif validation_result.get("error") == "duplicate":
+                logger.warning(f"Codigo ya escaneado: {validation_result['message']}")
+                self._show_message(frame, "CODIGO YA ESCANEADO", validation_result['message'], (0, 0, 200), 3000)
+            else:
+                logger.warning(f"Codigo rechazado: {validation_result['message']}")
+                self._show_message(frame, "CODIGO INVALIDO", validation_result['message'], (0, 0, 255), 2000)
+
+        cv2.imshow(self.WIN_SCAN, frame)
+        key = cv2.waitKey(1) & 0xFF
+        if key in (27, ord('q')):  # ESC o 'q' apagan la cámara (/start_scan la vuelve a abrir)
+            logger.info("Salida solicitada desde el teclado")
+            self._stop_event.set()
+
+    # ---------- modo: clasificación YOLO ----------
+    def _classify_step(self, cap):
+        # Terminar o cancelar (desde /finish, /quit o /force_restart): volver al QR
+        if self.quit_flag:
+            logger.info("Volviendo al escaneo de QR")
+            self._switch_mode(self.MODE_SCAN)
+            return
+
+        ret, frame = cap.read()
+        if not ret:
+            raise RuntimeError("Error al leer frame de la cámara")
+
+        cv2.imshow(self.WIN_CLASSIFY, frame)
+        key = cv2.waitKey(1) & 0xFF
+
+        if key in (27, ord('q')):
+            logger.info("Saliendo de la clasificación desde el teclado")
+            self._switch_mode(self.MODE_SCAN)
+            return
+
+        if key == ord('c') or self.capture_flag:
+            self._capture_and_upload(frame)
+            self.capture_flag = False
+
+    def _capture_and_upload(self, frame):
+        logger.info("Capturando y analizando imagen...")
+
+        detection_result = self.detector.detect_objects(frame)
+
+        self._play_sound(
+            self.config.SOUND_EXITO_PATH if detection_result.is_valid else self.config.SOUND_ERROR_PATH
+        )
+
+        cv2.imshow(self.WIN_RESULT, detection_result.frame_with_boxes)
+        cv2.waitKey(self.config.RESULT_DISPLAY_TIME)
+        try:
+            cv2.destroyWindow(self.WIN_RESULT)
+            cv2.waitKey(1)
+        except cv2.error:
+            pass
+
+        upload_result = self.backend_client.upload_image(detection_result.frame_with_boxes, detection_result)
+
+        if detection_result.is_valid:
+            logger.info(f"Clasificación válida: {detection_result.bottle_count} botella(s) detectada(s)")
+        else:
+            logger.warning("Clasificación inválida: objeto no válido detectado")
+
+        if upload_result["success"]:
+            logger.info("Imagen subida exitosamente al backend")
+        elif upload_result.get("status_code") == 409:
+            logger.warning("Imagen duplicada en el backend - continuando")
+        else:
+            logger.error(f"Error al subir imagen: {upload_result.get('error', 'Error desconocido')}")
+
+    def _show_message(self, frame, title: str, message: str, color: tuple, duration_ms: int):
+        """Muestra un mensaje sobre el video (código duplicado o inválido)"""
+        try:
+            display_frame = frame.copy()
+            sub_text = message[:50] + "..." if len(message) > 50 else message
+            height, width = display_frame.shape[:2]
+
+            overlay = display_frame.copy()
+            cv2.rectangle(overlay, (0, height // 2 - 60), (width, height // 2 + 60), color, -1)
+            cv2.addWeighted(overlay, 0.7, display_frame, 0.3, 0, display_frame)
+
+            font_scale = min(width / 800, 1.5)
+            cv2.putText(display_frame, title, (50, height // 2),
+                        cv2.FONT_HERSHEY_SIMPLEX, font_scale, (255, 255, 255), 2)
+            cv2.putText(display_frame, sub_text, (50, height // 2 + 30),
+                        cv2.FONT_HERSHEY_SIMPLEX, font_scale * 0.6, (200, 200, 200), 1)
+
+            cv2.imshow(self.WIN_SCAN, display_frame)
+            cv2.waitKey(duration_ms)
+
+        except Exception as e:
+            logger.error(f"Error mostrando mensaje: {e}")
 
 # Instancia global de la aplicación
 scanner_app = ScannerApp()
@@ -800,7 +695,7 @@ def capture_endpoint():
 def quit_endpoint():
     """Endpoint para salir de la clasificación"""
     try:
-        scanner_app.quit_flag = True
+        scanner_app.request_return_to_scan()
         return jsonify({
             "success": True,
             "message": "Señal de salida enviada"
@@ -814,79 +709,64 @@ def quit_endpoint():
         
 @app.route('/finish', methods=['POST'])
 def finish_endpoint():
-    """Endpoint para finalizar transacción y reiniciar aplicación"""
+    """Finaliza la transacción y vuelve al escaneo de QR"""
     try:
         logger.info("Solicitud de finalización de transacción recibida")
-        
+
         finish_result = scanner_app.backend_client.finishscan()
-        
+
         if finish_result["success"]:
-            logger.info(f"Transacción finalizada exitosamente: {finish_result.get('message', '')}")
-            
+            logger.info(
+                f"Transacción finalizada exitosamente: "
+                f"{finish_result.get('message', '')}"
+            )
+
             if 'totalPoints' in finish_result:
                 logger.info(f"Puntos otorgados: {finish_result['totalPoints']}")
-                logger.info(f"Items escaneados: {finish_result.get('itemsScanned', 0)}")
-        
+                logger.info(
+                    f"Items escaneados: {finish_result.get('itemsScanned', 0)}"
+                )
+
         elif finish_result.get("error") == "already_completed":
             logger.info("La transacción ya estaba completada")
-        
+
         elif finish_result.get("error") == "no_active_transaction":
             logger.warning("No había transacción activa para completar")
-        
+
         else:
-            logger.error(f"Error al finalizar transacción: {finish_result.get('message', 'Error desconocido')}")
-        
-        def restart_process():
-            try:
-                time.sleep(1)
-                
-                scanner_app.restart_application()
-                
-            except Exception as e:
-                logger.error(f"Error durante el proceso de reinicio: {e}")
-                scanner_app.reset_app_state()
-                time.sleep(2)
-                scanner_app.start_scanning()
-        
-        restart_thread = threading.Thread(target=restart_process, daemon=True)
-        restart_thread.start()
-        
-        return jsonify({
-            "success": True,
-            "message": "Transacción procesada y reinicio iniciado",
-            "transaction_result": finish_result,
-            "restart_initiated": True
-        }), 200
-        
+            logger.error(
+                f"Error al finalizar transacción: "
+                f"{finish_result.get('message', 'Error desconocido')}"
+            )
+
+        # El hilo de cámara vuelve al escaneo de QR.
+        # No se reinicia ni se cierra la cámara desde esta ruta.
+        scanner_app.request_return_to_scan()
+
+        return jsonify(finish_result), 200
+
     except Exception as e:
         logger.error(f"Error en endpoint finish: {e}")
-        
-        try:
-            def emergency_restart():
-                time.sleep(2)
-                scanner_app.restart_application()
-            
-            restart_thread = threading.Thread(target=emergency_restart, daemon=True)
-            restart_thread.start()
-            
-        except Exception as restart_error:
-            logger.error(f"Error en reinicio de emergencia: {restart_error}")
-        
         return jsonify({
             "success": False,
-            "error": str(e),
-            "message": "Error al procesar finalización, pero reinicio iniciado"
+            "error": str(e)
         }), 500
 
 @app.route('/status', methods=['GET'])
 def status_endpoint():
     """Endpoint para obtener el estado del sistema"""
+    running = scanner_app.is_running()
+
     return jsonify({
-        "scanning_active": scanner_app._scanning_active,
-        "classification_active": scanner_app._classification_active,
+        "scanning_active": (
+            running and scanner_app.mode == ScannerApp.MODE_SCAN
+        ),
+        "classification_active": (
+            running and scanner_app.mode == ScannerApp.MODE_CLASSIFY
+        ),
         "capture_flag": scanner_app.capture_flag,
         "quit_flag": scanner_app.quit_flag,
-        "restart_flag": scanner_app.restart_flag
+        "camera_thread_alive": running
     }), 200
 
 @app.route('/reset_user', methods=['POST'])
@@ -928,18 +808,19 @@ def check_code_endpoint(code):
 
 @app.route('/start_scan', methods=['POST'])
 def start_scan_endpoint():
-    """Endpoint para iniciar escaneo manualmente"""
+    """Inicia el escaneo si la cámara está apagada"""
     try:
         if scanner_app.start_scanning():
             return jsonify({
                 "success": True,
                 "message": "Escaneo iniciado"
             }), 200
-        else:
-            return jsonify({
-                "success": False,
-                "message": "Ya hay un escaneo activo o se está reiniciando"
-            }), 400
+
+        return jsonify({
+            "success": False,
+            "message": "La cámara ya está activa"
+        }), 400
+
     except Exception as e:
         logger.error(f"Error al iniciar escaneo: {e}")
         return jsonify({
@@ -949,37 +830,20 @@ def start_scan_endpoint():
 
 @app.route('/force_restart', methods=['POST'])
 def force_restart_endpoint():
-    """Endpoint para forzar reinicio completo del sistema (más agresivo)"""
+    """Vuelve al escaneo de QR y recupera el hilo si se detuvo"""
     try:
         logger.info("Reinicio forzado solicitado")
-        
-        def force_restart():
-            # Detener todo inmediatamente
-            scanner_app.restart_flag = True
-            scanner_app._scanning_active = False
-            scanner_app._classification_active = False
-            
-            # Cerrar ventanas
-            cv2.destroyAllWindows()
-            
-            # Esperar un momento
-            time.sleep(3)
-            
-            # Resetear estado completamente
-            scanner_app.reset_app_state()
-            
-            # Iniciar nuevo ciclo
-            time.sleep(1)
+
+        scanner_app.request_return_to_scan()
+
+        if not scanner_app.is_running():
             scanner_app.start_scanning()
-            
-        restart_thread = threading.Thread(target=force_restart, daemon=True)
-        restart_thread.start()
-        
+
         return jsonify({
             "success": True,
             "message": "Reinicio forzado iniciado"
         }), 200
-        
+
     except Exception as e:
         logger.error(f"Error en reinicio forzado: {e}")
         return jsonify({
@@ -1020,6 +884,5 @@ if __name__ == '__main__':
     except Exception as e:
         logger.error(f"Error fatal: {e}")
     finally:
-        # Limpieza
-        cv2.destroyAllWindows()
+        scanner_app.stop()
         logger.info("Aplicación finalizada")
