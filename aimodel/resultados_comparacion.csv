@@ -1,0 +1,91 @@
+﻿modelo,categoria_real,imagen,detecta_objeto,cantidad_detecciones,confianza_maxima,clases_detectadas,evaluacion,umbral_confianza
+Anterior_best,PET,botella aplastada.webp,True,1,0.8932,PET,ACIERTO,0.25
+Anterior_best,PET,botella plastada.jpg,True,1,0.9676,PET,ACIERTO,0.25
+Anterior_best,PET,chicha.jpeg,True,1,0.8901,PET,ACIERTO,0.25
+Anterior_best,PET,cielo.jpeg,True,1,0.9016,PET,ACIERTO,0.25
+Anterior_best,PET,plastic_107.jpg,True,1,0.9712,PET,ACIERTO,0.25
+Anterior_best,PET,plastic_135.jpg,True,1,0.4675,PET,ACIERTO,0.25
+Anterior_best,PET,plastic_145.jpg,True,1,0.9401,PET,ACIERTO,0.25
+Anterior_best,PET,plastic_149.jpg,True,1,0.9651,PET,ACIERTO,0.25
+Anterior_best,PET,plastic_182.jpg,True,1,0.9286,PET,ACIERTO,0.25
+Anterior_best,PET,plastic_264.jpg,True,1,0.9058,PET,ACIERTO,0.25
+Anterior_best,PET,plastic_293.jpg,True,1,0.9509,PET,ACIERTO,0.25
+Anterior_best,PET,plastic_305.jpg,True,1,0.9702,PET,ACIERTO,0.25
+Anterior_best,PET,plastic_327.jpg,True,1,0.7703,PET,ACIERTO,0.25
+Anterior_best,PET,plastic_424.jpg,True,1,0.9528,PET,ACIERTO,0.25
+Anterior_best,PET,plastic_519.jpg,True,1,0.8846,PET,ACIERTO,0.25
+Anterior_best,PET,plastic_527.jpg,True,1,0.7842,PET,ACIERTO,0.25
+Anterior_best,PET,plastic_555.jpg,True,1,0.8358,PET,ACIERTO,0.25
+Anterior_best,PET,plastic_597.jpg,True,1,0.8279,PET,ACIERTO,0.25
+Anterior_best,PET,plastic_63.jpg,True,1,0.9535,PET,ACIERTO,0.25
+Anterior_best,PET,plastic_680.jpg,True,1,0.6119,PET,ACIERTO,0.25
+Anterior_best,PET,plastic_754.jpg,True,1,0.9382,PET,ACIERTO,0.25
+Anterior_best,PET,plastic_760.jpg,True,1,0.939,PET,ACIERTO,0.25
+Anterior_best,NO_PET,botella vidrio.jpg,True,1,0.9637,PET,FALSO_POSITIVO,0.25
+Anterior_best,NO_PET,glass_144.jpg,True,1,0.8923,PET,FALSO_POSITIVO,0.25
+Anterior_best,NO_PET,glass_174.jpg,True,1,0.4443,PET,FALSO_POSITIVO,0.25
+Anterior_best,NO_PET,glass_200.jpg,True,1,0.9146,PET,FALSO_POSITIVO,0.25
+Anterior_best,NO_PET,glass_212.jpg,True,1,0.3928,PET,FALSO_POSITIVO,0.25
+Anterior_best,NO_PET,glass_79.jpg,True,1,0.9181,PET,FALSO_POSITIVO,0.25
+Anterior_best,NO_PET,glass_86.jpg,True,1,0.9469,PET,FALSO_POSITIVO,0.25
+Anterior_best,NO_PET,metal_1.jpg,True,1,0.3921,PET,FALSO_POSITIVO,0.25
+Anterior_best,NO_PET,metal_10.jpg,True,1,0.8927,PET,FALSO_POSITIVO,0.25
+Anterior_best,NO_PET,metal_148.jpg,True,1,0.9647,PET,FALSO_POSITIVO,0.25
+Anterior_best,NO_PET,metal_174.jpg,True,1,0.9026,PET,FALSO_POSITIVO,0.25
+Anterior_best,NO_PET,metal_178.jpg,True,1,0.8273,PET,FALSO_POSITIVO,0.25
+Anterior_best,NO_PET,metal_179.jpg,True,2,0.7301,PET;PET,FALSO_POSITIVO,0.25
+Anterior_best,NO_PET,metal_2.jpg,True,2,0.8049,PET;PET,FALSO_POSITIVO,0.25
+Anterior_best,NO_PET,metal_22.jpg,True,1,0.9076,PET,FALSO_POSITIVO,0.25
+Anterior_best,NO_PET,metal_246.jpg,True,1,0.7565,PET,FALSO_POSITIVO,0.25
+Anterior_best,NO_PET,metal_291.jpg,True,1,0.9464,PET,FALSO_POSITIVO,0.25
+Anterior_best,NO_PET,metal_318.jpg,True,1,0.7747,PET,FALSO_POSITIVO,0.25
+Anterior_best,NO_PET,metal_50.jpg,True,1,0.8596,PET,FALSO_POSITIVO,0.25
+Anterior_best,NO_PET,metal_56.jpg,True,1,0.9068,PET,FALSO_POSITIVO,0.25
+Anterior_best,NO_PET,metal_66.jpg,True,1,0.8672,PET,FALSO_POSITIVO,0.25
+Anterior_best,NO_PET,shampoo.png,True,1,0.9353,PET,FALSO_POSITIVO,0.25
+Anterior_best,NO_PET,soda tiburon.jpg,True,1,0.9151,PET,FALSO_POSITIVO,0.25
+Nuevo_Roboflow,PET,botella aplastada.webp,True,1,0.5565,PET,ACIERTO,0.25
+Nuevo_Roboflow,PET,botella plastada.jpg,True,2,0.7877,PET;PET,ACIERTO,0.25
+Nuevo_Roboflow,PET,chicha.jpeg,True,1,0.902,PET,ACIERTO,0.25
+Nuevo_Roboflow,PET,cielo.jpeg,True,1,0.6679,PET,ACIERTO,0.25
+Nuevo_Roboflow,PET,plastic_107.jpg,True,1,0.5752,PET,ACIERTO,0.25
+Nuevo_Roboflow,PET,plastic_135.jpg,True,2,0.9126,PET;PET,ACIERTO,0.25
+Nuevo_Roboflow,PET,plastic_145.jpg,True,1,0.9301,PET,ACIERTO,0.25
+Nuevo_Roboflow,PET,plastic_149.jpg,True,1,0.9338,PET,ACIERTO,0.25
+Nuevo_Roboflow,PET,plastic_182.jpg,True,1,0.9012,PET,ACIERTO,0.25
+Nuevo_Roboflow,PET,plastic_264.jpg,True,1,0.8803,PET,ACIERTO,0.25
+Nuevo_Roboflow,PET,plastic_293.jpg,True,4,0.8263,PET;PET;PET;PET,ACIERTO,0.25
+Nuevo_Roboflow,PET,plastic_305.jpg,True,1,0.9112,PET,ACIERTO,0.25
+Nuevo_Roboflow,PET,plastic_327.jpg,True,1,0.9022,PET,ACIERTO,0.25
+Nuevo_Roboflow,PET,plastic_424.jpg,True,1,0.9405,PET,ACIERTO,0.25
+Nuevo_Roboflow,PET,plastic_519.jpg,True,1,0.6028,PET,ACIERTO,0.25
+Nuevo_Roboflow,PET,plastic_527.jpg,True,1,0.9142,PET,ACIERTO,0.25
+Nuevo_Roboflow,PET,plastic_555.jpg,True,1,0.8775,PET,ACIERTO,0.25
+Nuevo_Roboflow,PET,plastic_597.jpg,False,0,,,NO_DETECTO_PET,0.25
+Nuevo_Roboflow,PET,plastic_63.jpg,True,1,0.9153,PET,ACIERTO,0.25
+Nuevo_Roboflow,PET,plastic_680.jpg,True,3,0.9078,PET;PET;PET,ACIERTO,0.25
+Nuevo_Roboflow,PET,plastic_754.jpg,True,1,0.913,PET,ACIERTO,0.25
+Nuevo_Roboflow,PET,plastic_760.jpg,True,3,0.8839,PET;PET;PET,ACIERTO,0.25
+Nuevo_Roboflow,NO_PET,botella vidrio.jpg,False,0,,,RECHAZO_CORRECTO,0.25
+Nuevo_Roboflow,NO_PET,glass_144.jpg,True,1,0.756,PET,FALSO_POSITIVO,0.25
+Nuevo_Roboflow,NO_PET,glass_174.jpg,False,0,,,RECHAZO_CORRECTO,0.25
+Nuevo_Roboflow,NO_PET,glass_200.jpg,False,0,,,RECHAZO_CORRECTO,0.25
+Nuevo_Roboflow,NO_PET,glass_212.jpg,False,0,,,RECHAZO_CORRECTO,0.25
+Nuevo_Roboflow,NO_PET,glass_79.jpg,False,0,,,RECHAZO_CORRECTO,0.25
+Nuevo_Roboflow,NO_PET,glass_86.jpg,False,0,,,RECHAZO_CORRECTO,0.25
+Nuevo_Roboflow,NO_PET,metal_1.jpg,False,0,,,RECHAZO_CORRECTO,0.25
+Nuevo_Roboflow,NO_PET,metal_10.jpg,False,0,,,RECHAZO_CORRECTO,0.25
+Nuevo_Roboflow,NO_PET,metal_148.jpg,False,0,,,RECHAZO_CORRECTO,0.25
+Nuevo_Roboflow,NO_PET,metal_174.jpg,False,0,,,RECHAZO_CORRECTO,0.25
+Nuevo_Roboflow,NO_PET,metal_178.jpg,False,0,,,RECHAZO_CORRECTO,0.25
+Nuevo_Roboflow,NO_PET,metal_179.jpg,False,0,,,RECHAZO_CORRECTO,0.25
+Nuevo_Roboflow,NO_PET,metal_2.jpg,False,0,,,RECHAZO_CORRECTO,0.25
+Nuevo_Roboflow,NO_PET,metal_22.jpg,False,0,,,RECHAZO_CORRECTO,0.25
+Nuevo_Roboflow,NO_PET,metal_246.jpg,False,0,,,RECHAZO_CORRECTO,0.25
+Nuevo_Roboflow,NO_PET,metal_291.jpg,False,0,,,RECHAZO_CORRECTO,0.25
+Nuevo_Roboflow,NO_PET,metal_318.jpg,False,0,,,RECHAZO_CORRECTO,0.25
+Nuevo_Roboflow,NO_PET,metal_50.jpg,False,0,,,RECHAZO_CORRECTO,0.25
+Nuevo_Roboflow,NO_PET,metal_56.jpg,False,0,,,RECHAZO_CORRECTO,0.25
+Nuevo_Roboflow,NO_PET,metal_66.jpg,False,0,,,RECHAZO_CORRECTO,0.25
+Nuevo_Roboflow,NO_PET,shampoo.png,False,0,,,RECHAZO_CORRECTO,0.25
+Nuevo_Roboflow,NO_PET,soda tiburon.jpg,False,0,,,RECHAZO_CORRECTO,0.25

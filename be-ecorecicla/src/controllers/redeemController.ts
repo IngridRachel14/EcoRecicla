@@ -1,10 +1,25 @@
 import type { Request, Response } from 'express';
 import { prisma } from '../utils/prismaclient';
+import { sendMail } from "../utils/mailclient";
 
 interface RedeemProductRequest {
     userId: number;
     productId: number;
     quantity?: number;
+}
+
+function escapeHtml(value: string | null | undefined): string {
+    return (value ?? "").replace(/[&<>"']/g, (char) => {
+        const entities: Record<string, string> = {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        };
+
+        return entities[char];
+    });
 }
 
 export const redeemProduct = async (req: Request, res: Response): Promise<any> => {
@@ -91,13 +106,70 @@ export const redeemProduct = async (req: Request, res: Response): Promise<any> =
 
             return {
                 redemption,
-                user: updatedUser,
+                userName: user.name,
+                userEmail: user.email,
                 product,
                 quantity,
                 totalCost,
                 remainingPoints: updatedUser.totalPoints
             };
         });
+
+        try {
+    const fechaCanje = new Date(result.redemption.claimedAt).toLocaleString(
+        "es-PA",
+        {
+            dateStyle: "long",
+            timeStyle: "short",
+            timeZone: "America/Panama"
+        }
+    );
+
+    const html = `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; color: #263238; line-height: 1.6;">
+            <div style="text-align: center; padding: 24px 16px; background-color: #e8f5e9; border-radius: 12px;">
+              <img
+                 src="https://res.cloudinary.com/dspzioalk/image/upload/Eco-recicla-panam%C3%A1_hwcrck.png"
+                 alt="Logo de EcoRecicla"
+                 width="180"
+                style="display: block; width: 180px; max-width: 100%; height: auto; margin: 0 auto 16px;"
+              />
+                <h1 style="color: #218838; margin-bottom: 8px;">¡Felicidades, ${escapeHtml(result.userName)}!</h1>
+                <p style="margin: 0;">Tu canje en EcoRecicla se ha realizado correctamente.</p>
+            </div>
+
+            <div style="padding: 20px 8px;">
+                <p>Gracias por formar parte de EcoRecicla y contribuir al reciclaje. Estos son los detalles de tu canje:</p>
+
+                <div style="background-color: #f7f9f7; padding: 18px; border-radius: 10px;">
+                    <p><strong>Producto:</strong> ${escapeHtml(result.product.name)}</p>
+                    <p><strong>Cantidad:</strong> ${result.quantity}</p>
+                    <p><strong>Puntos utilizados:</strong> ${result.totalCost}</p>
+                    <p><strong>Puntos restantes:</strong> ${result.remainingPoints}</p>
+                    <p><strong>Fecha del canje:</strong> ${fechaCanje}</p>
+                    <p><strong>Número de canje:</strong> ${result.redemption.id}</p>
+                </div>
+
+                <p>¡Sigue reciclando, acumulando puntos y disfrutando de nuevas recompensas!</p>
+
+                <p style="color: #607d68; font-size: 12px; text-align: center;">
+                    Este es un correo automático de EcoRecicla. Conserva este mensaje como comprobante de tu canje.
+                </p>
+            </div>
+        </div>
+    `;
+
+    await sendMail(
+        result.userEmail,
+        "¡Tu canje en EcoRecicla fue exitoso!",
+        html
+    );
+} catch (emailError) {
+    console.error(
+        "El canje se completó, pero no se pudo enviar el correo de confirmación:",
+        emailError
+    );
+}
 
         return res.status(200).json({
             success: true,

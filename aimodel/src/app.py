@@ -15,6 +15,7 @@ from typing import Optional, Tuple, List
 from user import guardar_usuario_activo
 from settings import url_backend, API_TOKEN
 
+
 import signal
 
 def handle_shutdown(signum, frame):
@@ -71,7 +72,7 @@ class DetectionResult:
 class ScannerConfig:
     """Configuración centralizada del sistema"""
     BASE_DIR: str = os.path.dirname(os.path.abspath(__file__))
-    MODEL_PATH: str = 'src/yolov11.pt'
+    MODEL_PATH: str = 'src/weights.pt'
     TEMP_IMAGE_PATH: str = 'temp.jpg'
     SOUND_PATH: str = os.path.join(BASE_DIR, 'sounds', 'scan.mp3')
     SOUND_EXITO_PATH: str = os.path.join(BASE_DIR, 'sounds', 'exito_v2.mp3')
@@ -87,10 +88,10 @@ class ScannerConfig:
 
     def __post_init__(self):
         if self.VALID_CLASSES is None:
-            self.VALID_CLASSES = ['Transparet Plastic Bottle', 'PET']
+            self.VALID_CLASSES = ['PET']
         if self.BOTTLE_CLASSES is None:
-            # Clases que se consideran botellas para el conteo
-            self.BOTTLE_CLASSES = ['Transparet Plastic Bottle', 'PET', 'bottle', 'plastic bottle']
+            # Clase que se considera botellas para el conteo
+            self.BOTTLE_CLASSES = ['PET']
 
 class CameraManager:
     """Manejo de la cámara. Se abre UNA vez y se mantiene abierta."""
@@ -449,7 +450,6 @@ class ScannerApp:
         self.backend_client = BackendClient(url_backend, API_TOKEN, self.config.REQUEST_TIMEOUT)
         self.detector = ObjectDetector(self.config.MODEL_PATH, self.config)
         self.qr_detector = cv2.QRCodeDetector()
-
         self._lock = threading.Lock()
         self._mode = self.MODE_SCAN
         self._capture_flag = False
