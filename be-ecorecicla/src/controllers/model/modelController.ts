@@ -161,7 +161,9 @@ export const verifyImage = async (req: Request, res: Response): Promise<any> => 
  
     const imageRecord = await prisma.itemScanned.create({
         data: {
-            valid: Boolean(valid),
+            valid: typeof valid === 'boolean'
+                 ? valid
+                 : String(valid).toLowerCase() === 'true',
             bottle: Number(bottle),
             description: description,
             transactionId: getScannedtrans(),
