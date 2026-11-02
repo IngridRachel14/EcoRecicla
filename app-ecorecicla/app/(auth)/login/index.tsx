@@ -1,7 +1,7 @@
 import { useAuthSession } from '@/providers/AuthProvider';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { ActivityIndicator, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Image, StyleSheet, Text, TextInput, TouchableOpacity, View, KeyboardAvoidingView, ScrollView, Platform } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
 export default function LoginScreen() {
@@ -47,40 +47,78 @@ export default function LoginScreen() {
             setLoading(false);
         }
     };
-    return (
-        <View style={styles.container}>
-            <Image source={require('../../../assets/images/Eco.png')} style={styles.logo} />
+    
+return (
+    <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
+        <ScrollView
+            contentContainerStyle={styles.container}
+            keyboardShouldPersistTaps="handled"
+            showsVerticalScrollIndicator={false}
+        >
+            <Image
+                source={require('../../../assets/images/Eco.png')}
+                style={styles.logo}
+            />
 
             <Text style={styles.welcome}>Bienvenido</Text>
 
-            {error && <Text style={{ color: 'red' }}>Nombre de usuario o contraseña incorrectos </Text>}
+            {error && (
+                <Text style={{ color: 'red' }}>
+                    Nombre de usuario o contraseña incorrectos
+                </Text>
+            )}
 
-            <TextInput placeholder="Email" style={styles.input} onChangeText={setEmail} />
-            <TextInput placeholder="Password" secureTextEntry style={styles.input} onChangeText={setPassword} />
+            <TextInput
+                placeholder="Email"
+                style={styles.input}
+                onChangeText={setEmail}
+                keyboardType="email-address"
+                autoCapitalize="none"
+            />
 
+            <TextInput
+                placeholder="Password"
+                secureTextEntry
+                style={styles.input}
+                onChangeText={setPassword}
+            />
 
-            <TouchableOpacity style={styles.loginButton} onPress={handleLogin} disabled={loading}>
-                <Text style={styles.loginText}>{loading ? 'Ingresando...' : 'INGRESAR'}</Text>
+            <TouchableOpacity
+                style={styles.loginButton}
+                onPress={handleLogin}
+                disabled={loading}
+            >
+                <Text style={styles.loginText}>
+                    {loading ? 'Ingresando...' : 'INGRESAR'}
+                </Text>
             </TouchableOpacity>
 
-
-
-            <TouchableOpacity style={styles.signupContainer} onPress={() => {
-                router.replace('/(auth)/sign-up');
-            }}>
-                <Text>¿No tienes una cuenta? <Text style={styles.signup}>Sign up</Text></Text>
+            <TouchableOpacity
+                style={styles.signupContainer}
+                onPress={() => router.replace('/(auth)/sign-up')}
+            >
+                <Text>
+                    ¿No tienes una cuenta?{' '}
+                    <Text style={styles.signup}>Sign up</Text>
+                </Text>
             </TouchableOpacity>
-        </View>
-    );
+        </ScrollView>
+    </KeyboardAvoidingView>
+);
+
 }
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 60,
-        paddingHorizontal: 20,
-        backgroundColor: '#fff',
-        flex: 1,
-        justifyContent: 'center',
+    flexGrow: 1,
+    paddingTop: 40,
+    paddingBottom: 40,
+    paddingHorizontal: 20,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
     },
     backButton: {
         marginBottom: 20,

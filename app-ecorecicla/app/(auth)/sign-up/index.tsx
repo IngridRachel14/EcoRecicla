@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ActivityIndicator } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ActivityIndicator, KeyboardAvoidingView, ScrollView, Platform } from 'react-native';
 import { useAuthSession } from '@/providers/AuthProvider';
 import { router, useLocalSearchParams } from 'expo-router';
 import { InputWithIcon } from '@/components/InputWithIcon';
@@ -50,11 +50,24 @@ export default function LoginScreen() {
         }
     };
     return (
-        <View style={styles.container}>
+    <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
+        <ScrollView
+            contentContainerStyle={styles.container}
+            keyboardShouldPersistTaps="handled"
+            showsVerticalScrollIndicator={false}
+        >
             <Image source={require('../../../assets/images/Eco.png')} style={styles.logo} />
 
             <Text style={styles.welcome}>Registro</Text>
-            {error && <Text style={{ color: 'red' }}>Nombre de usuario o contraseña incorrectos. </Text>}
+
+            {error && (
+                <Text style={{ color: 'red' }}>
+                    Nombre de usuario o contraseña incorrectos.
+                </Text>
+            )}
 
             <InputWithIcon
                 placeholder="Correo"
@@ -62,6 +75,7 @@ export default function LoginScreen() {
                 onChangeText={setEmail}
                 icon="mail-outline"
             />
+
             <InputWithIcon
                 placeholder="Contraseña"
                 value={password}
@@ -77,27 +91,39 @@ export default function LoginScreen() {
                 icon="person"
             />
 
-
-            <TouchableOpacity style={styles.loginButton} onPress={handleLogin} disabled={loading}>
-                <Text style={styles.loginText}>{loading ? 'Registering in...' : 'SING-UP'}</Text>
+            <TouchableOpacity
+                style={styles.loginButton}
+                onPress={handleLogin}
+                disabled={loading}
+            >
+                <Text style={styles.loginText}>
+                    {loading ? 'Registering in...' : 'SING-UP'}
+                </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.signupContainer} onPress={() => {
-                router.replace('/(auth)/login');
-            }}>
-                <Text>¿Tienes una cuenta? <Text style={styles.signup}>Ingresa</Text></Text>
+            <TouchableOpacity
+                style={styles.signupContainer}
+                onPress={() => {
+                    router.replace('/(auth)/login');
+                }}
+            >
+                <Text>
+                    ¿Tienes una cuenta? <Text style={styles.signup}>Ingresa</Text>
+                </Text>
             </TouchableOpacity>
-        </View>
-    );
+        </ScrollView>
+    </KeyboardAvoidingView>
+);
 }
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 60,
-        paddingHorizontal: 20,
-        backgroundColor: '#fff',
-        flex: 1,
-        justifyContent: 'center',
+    flexGrow: 1,
+    paddingTop: 40,
+    paddingBottom: 40,
+    paddingHorizontal: 20,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
     },
     backButton: {
         marginBottom: 20,
