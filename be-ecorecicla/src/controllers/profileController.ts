@@ -38,7 +38,6 @@ export const getMyProfile = async (req: Request, res: Response): Promise<any> =>
             select: {
                 id: true,
                 name: true,
-                money: true,
                 totalPoints: true,
                 picture: {
                     select: {

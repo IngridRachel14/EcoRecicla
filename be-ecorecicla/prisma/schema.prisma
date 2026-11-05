@@ -18,26 +18,18 @@ model User {
   name                String
   password            String
   barcode             String               @unique @default(uuid())
-  referralCode        String               @unique @default(cuid())
   totalPoints         Int                  @default(0)
   roleId              Int
   pictureId           Int
   createdAt           DateTime             @default(now())
-  referredById        Int?
-  referralPoints      Int                  @default(0)
-  money               Int                  @default(0)
   passwordResetTokens PasswordResetToken[]
   ProductRedemption   ProductRedemption[]
-  rewardClaims        RewardClaim[]
   transactions        Transaction[]
   picture             UserAvatar           @relation(fields: [pictureId], references: [id])
-  referredBy          User?                @relation("Referrals", fields: [referredById], references: [id])
-  referrals           User[]               @relation("Referrals")
   role                Role                 @relation(fields: [roleId], references: [id])
   userban             UserBan?
 
   @@index([pictureId], map: "User_pictureId_fkey")
-  @@index([referredById], map: "User_referredById_fkey")
   @@index([roleId], map: "User_roleId_fkey")
 }
 
@@ -120,28 +112,6 @@ model ItemScanned {
   @@index([transactionId], map: "ItemScanned_transactionId_fkey")
 }
 
-model Reward {
-  id          Int           @id @default(autoincrement())
-  name        String
-  description String
-  image       String?
-  costPoints  Int           @default(0)
-  createdAt   DateTime      @default(now())
-  redemptions RewardClaim[]
-}
-
-model RewardClaim {
-  id        Int      @id @default(autoincrement())
-  userId    Int
-  rewardId  Int
-  claimedAt DateTime @default(now())
-  delivered Boolean  @default(false)
-  reward    Reward   @relation(fields: [rewardId], references: [id])
-  user      User     @relation(fields: [userId], references: [id])
-
-  @@index([rewardId], map: "RewardClaim_rewardId_fkey")
-  @@index([userId], map: "RewardClaim_userId_fkey")
-}
 
 model ProductRedemption {
   id         Int      @id @default(autoincrement())

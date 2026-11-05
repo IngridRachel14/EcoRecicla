@@ -7,7 +7,7 @@ import { generateUniqueBarcode } from "../utils/barcode";
 
 export const registerUser = async (req: Request, res: Response): Promise<any> => {
   try {
-    const { email, password, name, referralCode } = req.body;
+    const { email, password, name } = req.body;
 
     if (!email || !password) {
       return res.status(400).json({ error: 'Faltan campos obligatorios' });
@@ -23,17 +23,8 @@ export const registerUser = async (req: Request, res: Response): Promise<any> =>
       return res.status(409).json({ error: 'El usuario ya está registrado' });
     }
 
-    let referredByUser = null;
 
-    if (referralCode) {
-      referredByUser = await prisma.user.findUnique({
-        where: { referralCode }
-      });
-
-      if (!referredByUser) {
-        return res.status(400).json({ error: 'Código de referido inválido' });
-      }
-    }
+    
 
     const hashedPassword = await Bun.password.hash(password, {
       algorithm: "bcrypt"
@@ -48,7 +39,6 @@ export const registerUser = async (req: Request, res: Response): Promise<any> =>
         password: hashedPassword,
         roleId: 1,
         pictureId: 1,
-        referredById: referredByUser?.id,
         barcode
       }
     });
